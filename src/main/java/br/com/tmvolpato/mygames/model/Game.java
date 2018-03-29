@@ -1,0 +1,83 @@
+package br.com.tmvolpato.mygames.model;
+
+import br.com.tmvolpato.mygames.common.constant.ConstantColumn;
+import br.com.tmvolpato.mygames.common.constant.ConstantMessageValidation;
+import br.com.tmvolpato.mygames.common.constant.ConstantNumeric;
+import br.com.tmvolpato.mygames.common.constant.ConstantTable;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
+import java.util.List;
+
+/**
+ * Classe Game.
+ *
+ * @author Thiago Michel Volpato
+ * @version 1.0.0
+ * @sice 2017
+ */
+@Entity
+@Table(name = ConstantTable.GAME)
+@ToString(of = { "id" })
+@EqualsAndHashCode(of = { "id" }, callSuper = false)
+public class Game extends AbstractPersistable {
+
+    /**
+     * Serial Version.
+     */
+    private static final long serialVersionUID = 1326676340346125416L;
+
+    /**
+     * FK.
+     */
+    private transient final String FK = "fk_game_";
+
+    @Getter
+    @Setter
+    @NotBlank(message = ConstantMessageValidation.TITLE_NOT_BLANK)
+    @Column(name = ConstantColumn.TITLE, unique = true, length = ConstantNumeric.TWO_HUNDRED)
+    private String title;
+
+    @Getter
+    @Setter
+    @NotNull(message = ConstantMessageValidation.PRICE_NOT_NULL)
+    @Column(name = ConstantColumn.PRICE, nullable = false, precision = ConstantNumeric.TEN, scale = ConstantNumeric.TWO)
+    private BigDecimal price;
+
+    @Getter
+    @Setter
+    @NotNull(message = ConstantMessageValidation.PLATFORM_NOT_NULL)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = ConstantColumn.PLATFORM_ID, nullable = false, referencedColumnName = ConstantColumn.ID, foreignKey = @ForeignKey(name = FK + ConstantColumn.PLATFORM))
+    private Platform platform;
+
+    @Getter
+    @Setter
+    @NotNull(message = ConstantMessageValidation.COMPANY_NOT_NULL)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = ConstantColumn.COMPANY_ID, nullable = false, referencedColumnName = ConstantColumn.ID, foreignKey = @ForeignKey(name = FK + ConstantColumn.COMPANY))
+    private Company company;
+
+    @Getter
+    @Setter
+    @NotNull(message = ConstantMessageValidation.GENRE_NOT_NULL)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = ConstantColumn.GENERE_ID, nullable = false, referencedColumnName = ConstantColumn.ID, foreignKey = @ForeignKey(name = FK + ConstantColumn.GENRE))
+    private Genre genre;
+
+    @Getter
+    @Setter
+    @NotNull(message = ConstantMessageValidation.USER_NOT_NULL)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = ConstantColumn.USER_ID, nullable = false, referencedColumnName = ConstantColumn.ID, foreignKey = @ForeignKey(name = FK + ConstantColumn.USER))
+    private User user;
+
+
+    public Game() {}
+}
