@@ -48,23 +48,25 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
-    public void delete(final Long primaryKey) {
-        final Optional<Game> game = this.findById(primaryKey);
-        ServicePreconditions.checkEntityExists(game.isPresent());
-        this.gameRepository.delete(game.get());
+    public void delete(final Game game) {
+        ServicePreconditions.checkParameterLong(game.getId());
+        this.gameRepository.delete(game);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<Game> findById(final Long id) {
+    public Optional<Game> findById(final User userLogged, final Long id) {
+        ServicePreconditions.checkParameterLong(userLogged.getId());
         ServicePreconditions.checkParameterLong(id);
-        return this.gameRepository.findOne(Specification.where(GameSpecification.findById(id)));
+        final Optional<Game> game = this.gameRepository.findOne(Specification.where(GameSpecification.findById(userLogged, id)));
+        ServicePreconditions.checkEntityExists(game.isPresent());
+        return game;
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Page<Game> findAllPaginatedAndFilter(final User user, final GameFilter gameFilter,
+    public Page<Game> findAllPaginatedAndFilter(final User userLogged, final GameFilter gameFilter,
                                                 final int page, final int size) {
-        return this.gameRepository.findAllPaginatedAndFilter(user, gameFilter, page, size);
+        return this.gameRepository.findAllPaginatedAndFilter(userLogged, gameFilter, page, size);
     }
 }

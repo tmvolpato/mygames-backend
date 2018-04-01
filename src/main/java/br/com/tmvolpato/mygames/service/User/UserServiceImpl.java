@@ -42,21 +42,26 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void delete(final Long primaryKey) {
-        final Optional<User> user = this.findById(primaryKey);
-        ServicePreconditions.checkEntityExists(user);
-        this.userRepository.delete(user.get());
+    public void delete(final User user) {
+        ServicePreconditions.checkParameterLong(user.getId());
+        this.userRepository.delete(user);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<User> findById(final Long id) {
         ServicePreconditions.checkParameterLong(id);
-        return this.userRepository.findOne(Specification.where(UserSpecification.findById(id)));
+        final Optional<User> user = this.userRepository.findOne(Specification.where(UserSpecification.findById(id)));
+        ServicePreconditions.checkEntityExists(user.isPresent());
+        return user;
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<User> findUsername(final String email) {
         ServicePreconditions.checkParameterString(email);
-        return this.userRepository.findOne(Specification.where(UserSpecification.findByEmail(email)));
+        final Optional<User> user = this.userRepository.findOne(Specification.where(UserSpecification.findByEmail(email)));
+        ServicePreconditions.checkEntityExists(user.isPresent());
+        return user;
     }
 }

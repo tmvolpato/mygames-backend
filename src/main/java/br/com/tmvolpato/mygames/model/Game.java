@@ -4,6 +4,7 @@ import br.com.tmvolpato.mygames.common.constant.ConstantColumn;
 import br.com.tmvolpato.mygames.common.constant.ConstantMessageValidation;
 import br.com.tmvolpato.mygames.common.constant.ConstantNumeric;
 import br.com.tmvolpato.mygames.common.constant.ConstantTable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,7 +14,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
-import java.util.List;
 
 /**
  * Classe Game.
@@ -68,9 +68,10 @@ public class Game extends AbstractPersistable {
     @Setter
     @NotNull(message = ConstantMessageValidation.GENRE_NOT_NULL)
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = ConstantColumn.GENERE_ID, nullable = false, referencedColumnName = ConstantColumn.ID, foreignKey = @ForeignKey(name = FK + ConstantColumn.GENRE))
+    @JoinColumn(name = ConstantColumn.GENRE_ID, nullable = false, referencedColumnName = ConstantColumn.ID, foreignKey = @ForeignKey(name = FK + ConstantColumn.GENRE))
     private Genre genre;
 
+    @JsonIgnore
     @Getter
     @Setter
     @NotNull(message = ConstantMessageValidation.USER_NOT_NULL)

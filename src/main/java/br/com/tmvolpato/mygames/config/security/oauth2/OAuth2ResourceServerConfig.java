@@ -29,12 +29,12 @@ public class OAuth2ResourceServerConfig extends ResourceServerConfigurerAdapter 
     private String resourceIds;
 
     @Override
-    public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
+    public void configure(final ResourceServerSecurityConfigurer resources) throws Exception {
         resources.resourceId(this.resourceIds).tokenServices(this.tokenServices);
     }
 
     @Override
-    public void configure(HttpSecurity http) throws Exception {
+    public void configure(final HttpSecurity http) throws Exception {
         http
                 .cors()
                 .and()

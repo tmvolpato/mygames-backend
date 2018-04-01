@@ -15,5 +15,5 @@ import org.springframework.data.domain.Page;
 public interface GameRepositoryQuery {
 
     Page<Game> findAllPaginatedAndFilter(User user, GameFilter gameFilter, int page, int size);
-    long count(User user, GameFilter gameFilter);
+    long count(User userLogged, GameFilter gameFilter);
 }

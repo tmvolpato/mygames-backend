@@ -2,6 +2,12 @@ package br.com.tmvolpato.mygames.repository.game.specification;
 
 import br.com.tmvolpato.mygames.common.constant.ConstantQuery;
 import br.com.tmvolpato.mygames.model.*;
+import br.com.tmvolpato.mygames.model.Company_;
+import br.com.tmvolpato.mygames.model.Game_;
+import br.com.tmvolpato.mygames.model.Genre_;
+import br.com.tmvolpato.mygames.model.Platform_;
+import br.com.tmvolpato.mygames.model.Role_;
+import br.com.tmvolpato.mygames.model.User_;
 import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.criteria.Expression;
@@ -23,10 +29,19 @@ public final class GameSpecification {
      * @param id
      * @return
      */
-    public static Specification<Game> findById(final Long id) {
+    public static Specification<Game> findById(final User userLogged, final Long id) {
         return (root, criteriaQuery, criteriaBuilder) -> {
-            final Expression<Long> property = root.get(Game_.id);
-            return criteriaBuilder.equal(property, id);
+
+            root.fetch(Game_.company, JoinType.LEFT);
+            root.fetch(Game_.platform, JoinType.LEFT);
+            root.fetch(Game_.genre, JoinType.LEFT);
+            root.fetch(Game_.user, JoinType.LEFT)
+                    .fetch(User_.roles, JoinType.LEFT)
+                    .fetch(Role_.privileges, JoinType.LEFT);
+            final Expression<User> user = root.get(Game_.user);
+            final Expression<Long> gameId = root.get(Game_.id);
+            return criteriaBuilder.and(criteriaBuilder.equal(user, userLogged),
+                                criteriaBuilder.equal(gameId, id));
         };
     }
 

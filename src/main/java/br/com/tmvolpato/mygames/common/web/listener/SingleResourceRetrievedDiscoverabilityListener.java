@@ -38,7 +38,7 @@ public class SingleResourceRetrievedDiscoverabilityListener implements Applicati
     }
 
     final void discoverGetAllURI(final UriComponentsBuilder uriBuilder, final HttpServletResponse response, final Class clazz) {
-        final String uriForResourceCreation = uriBuilder.path(ConstantWeb.SLASH + uriMapper.getUriBase(clazz)).build().encode().toUriString();
+        final String uriForResourceCreation = uriBuilder.path(ConstantWeb.API + uriMapper.getUriBase(clazz)).build().encode().toUriString();
         final String linkHeaderValue = createLinkHeader(uriForResourceCreation, REL_COLLECTION);
         response.addHeader(HttpHeaders.LINK, linkHeaderValue);
     }

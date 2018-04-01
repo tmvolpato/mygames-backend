@@ -36,8 +36,6 @@ public class UserApplication implements UserDetails {
 
     /**
      * Adiciona a role e seus privilegios.
-     *
-     * @param roles
      * @return
      */
     @Override

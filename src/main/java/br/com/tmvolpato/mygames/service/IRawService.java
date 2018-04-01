@@ -15,5 +15,5 @@ public interface IRawService<T extends IEntity> {
 
     T update(T entity);
 
-    void delete(Long primaryKey);
+    void delete(T entity);
 }

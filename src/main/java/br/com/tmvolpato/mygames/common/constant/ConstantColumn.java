@@ -23,7 +23,7 @@ public final class ConstantColumn {
     public static final String PRICE = "price";
     public static final String USER = "user";
     public static final String PLATFORM_ID = "platform_id";
-    public static final String GENERE_ID = "genre_id";
+    public static final String GENRE_ID = "genre_id";
     public static final String ROLE_ID = "role_id";
     public static final String PRIVILEGE_ID = "privilege_id";
     public static final String COMPANY_ID = "company_id";

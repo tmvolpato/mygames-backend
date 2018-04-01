@@ -22,7 +22,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Classe de implementação query customizada para a entidade game.
+ * Querie customizada para a entidade game.
  *
  * @author Thiago Michel Volpato
  * @version 1.0.0
@@ -64,20 +64,20 @@ public class GameRepositoryQueryImpl extends AbstractQuery implements GameReposi
     /**
      * Filtros de pesquisa.
      *
-     * @param user
+     * @param userLogged
      * @param gameFilter
      * @param criteriaQuery
      * @param builder
      * @param root
      * @return
      */
-    private Predicate[] createPredicates(final User user, final GameFilter gameFilter,
+    private Predicate[] createPredicates(final User userLogged, final GameFilter gameFilter,
                                          final CriteriaQuery<?> criteriaQuery,
                                          final CriteriaBuilder builder,
                                          final Root<Game> root) {
 
        final List<Predicate> predicates = new LinkedList<>();
-       final Predicate predicate = builder.equal(root.get(Game_.user).get(User_.id), user.getId());
+       final Predicate predicate = builder.equal(root.get(Game_.user).get(User_.id), userLogged.getId());
 
         predicates.add(predicate);
 
