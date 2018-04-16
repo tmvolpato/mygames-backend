@@ -9,11 +9,11 @@ import br.com.tmvolpato.mygames.common.interfaces.IEntity;
  * @since 2017
  * @version 1.0.0
  */
-public interface IRawService<T extends IEntity> {
+public interface IRawService<E, T extends IEntity>{
 
-    T create(T entity);
+    T create(E owner, T entity);
 
-    T update(T entity);
+    T update(E owner, T entity);
 
-    void delete(T entity);
+    void delete(E owner, Long primaryKey);
 }

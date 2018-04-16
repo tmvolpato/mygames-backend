@@ -1,9 +1,6 @@
 package br.com.tmvolpato.mygames.repository.game.queryCustom;
 
-import br.com.tmvolpato.mygames.model.Game;
-import br.com.tmvolpato.mygames.model.Game_;
-import br.com.tmvolpato.mygames.model.User;
-import br.com.tmvolpato.mygames.model.User_;
+import br.com.tmvolpato.mygames.model.*;
 import br.com.tmvolpato.mygames.repository.AbstractQuery;
 import br.com.tmvolpato.mygames.repository.game.filter.GameFilter;
 import br.com.tmvolpato.mygames.repository.game.specification.GameSpecification;
@@ -38,6 +35,14 @@ public class GameRepositoryQueryImpl extends AbstractQuery implements GameReposi
         final CriteriaBuilder builder = this.em.getCriteriaBuilder();
         final CriteriaQuery<Game> criteria = builder.createQuery(Game.class);
         final Root<Game> root = criteria.from(Game.class);
+
+        root.fetch(Game_.company, JoinType.LEFT);
+        root.fetch(Game_.platform, JoinType.LEFT);
+        root.fetch(Game_.genre, JoinType.LEFT);
+        root.fetch(Game_.user, JoinType.LEFT)
+                .fetch(User_.roles, JoinType.LEFT)
+                .fetch(Role_.privileges, JoinType.LEFT);
+
         final Predicate[] predicates = this.createPredicates(user, gameFilter, criteria, builder, root);
         criteria.where(predicates);
         criteria.orderBy(builder.asc(root.get(Game_.title)));

@@ -183,7 +183,7 @@ public final class RestPreconditions {
         return resource;
     }
 
-    /**
+     /**
      * Verifica se algum valor foi encontrado, caso contrario lança exceção.
      *
      * @param expression

@@ -5,7 +5,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import static java.util.stream.Collectors.joining;
 
 /**
- * Classe de condificação da senha usado somente em desenvolvimento.
+ * Codificação da senha, usado somente para desenvolvimento.
  *
  * @author Thiago Michel Volpato
  * @version 1.0.0

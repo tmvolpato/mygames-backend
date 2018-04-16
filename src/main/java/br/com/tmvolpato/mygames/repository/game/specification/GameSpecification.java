@@ -2,12 +2,6 @@ package br.com.tmvolpato.mygames.repository.game.specification;
 
 import br.com.tmvolpato.mygames.common.constant.ConstantQuery;
 import br.com.tmvolpato.mygames.model.*;
-import br.com.tmvolpato.mygames.model.Company_;
-import br.com.tmvolpato.mygames.model.Game_;
-import br.com.tmvolpato.mygames.model.Genre_;
-import br.com.tmvolpato.mygames.model.Platform_;
-import br.com.tmvolpato.mygames.model.Role_;
-import br.com.tmvolpato.mygames.model.User_;
 import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.criteria.Expression;
@@ -29,8 +23,8 @@ public final class GameSpecification {
      * @param id
      * @return
      */
-    public static Specification<Game> findById(final User userLogged, final Long id) {
-        return (root, criteriaQuery, criteriaBuilder) -> {
+    public static Specification<Game> findById(final User owner, final Long id) {
+        return ((root, criteriaQuery, criteriaBuilder) -> {
 
             root.fetch(Game_.company, JoinType.LEFT);
             root.fetch(Game_.platform, JoinType.LEFT);
@@ -40,9 +34,9 @@ public final class GameSpecification {
                     .fetch(Role_.privileges, JoinType.LEFT);
             final Expression<User> user = root.get(Game_.user);
             final Expression<Long> gameId = root.get(Game_.id);
-            return criteriaBuilder.and(criteriaBuilder.equal(user, userLogged),
+            return criteriaBuilder.and(criteriaBuilder.equal(user, owner),
                                 criteriaBuilder.equal(gameId, id));
-        };
+        });
     }
 
     /**
@@ -52,10 +46,10 @@ public final class GameSpecification {
      * @return
      */
     public static Specification<Game> findByTitle(final String title) {
-        return (root, criteriaQuery, criteriaBuilder) -> {
+        return ((root, criteriaQuery, criteriaBuilder) -> {
             final Expression<String> property = root.get(Game_.title);
             return criteriaBuilder.equal(property, ConstantQuery.PERCENTAGE + title + ConstantQuery.PERCENTAGE);
-        };
+        });
     }
 
     /**
@@ -65,10 +59,10 @@ public final class GameSpecification {
      * @return
      */
     public static Specification<Game> findByPlatform(final Platform platform) {
-        return (root, criteriaQuery, criteriaBuilder) -> {
-            final Join<Game, Platform> platformJoin = root.join(Game_.platform, JoinType.LEFT);
-            return criteriaBuilder.equal(platformJoin.get(Platform_.id), platform.getId());
-        };
+        return ((root, criteriaQuery, criteriaBuilder) -> {
+            final Join<Game, Platform> platformJoin = root.join(Game_.platform);
+            return criteriaBuilder.equal(platformJoin, platform);
+        });
     }
 
     /**
@@ -78,10 +72,10 @@ public final class GameSpecification {
      * @return
      */
     public static Specification<Game> findByCompany(final Company company) {
-        return (root, criteriaQuery, criteriaBuilder) -> {
-            final Join<Game, Company> companyJoin = root.join(Game_.company, JoinType.LEFT);
-            return criteriaBuilder.equal(companyJoin.get(Company_.id), company.getId());
-        };
+        return ((root, criteriaQuery, criteriaBuilder) -> {
+            final Join<Game, Company> companyJoin = root.join(Game_.company);
+            return criteriaBuilder.equal(companyJoin, company);
+        });
     }
 
     /**
@@ -91,9 +85,9 @@ public final class GameSpecification {
      * @return
      */
     public static Specification<Game> findByGenre(final Genre genre) {
-        return (root, criteriaQuery, criteriaBuilder) -> {
-            final Join<Game, Genre> genreJoin = root.join(Game_.genre, JoinType.LEFT);
-            return criteriaBuilder.equal(genreJoin.get(Genre_.id), genre.getId());
-        };
+        return ((root, criteriaQuery, criteriaBuilder) -> {
+            final Join<Game, Genre> genreJoin = root.join(Game_.genre);
+            return criteriaBuilder.equal(genreJoin, genre);
+        });
     }
 }

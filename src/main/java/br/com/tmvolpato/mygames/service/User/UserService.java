@@ -12,8 +12,8 @@ import java.util.Optional;
  * @since 2017
  * @version 1.0.0
  */
-public interface UserService extends IRawService<User> {
+public interface UserService extends IRawService<User, User> {
 
-    Optional<User> findById(Long id);
+    Optional<User> findById(User owner, Long id);
     Optional<User> findUsername(String email);
 }

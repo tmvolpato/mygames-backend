@@ -53,7 +53,7 @@ public class GameResource extends AbstractResource<Game> {
     public void create(@Valid @RequestBody final Game game, final UriComponentsBuilder uriBuilder,
                        final HttpServletResponse response) {
         this.checkRequiredCreateInternal(game);
-        final Game gameSaved = this.gameService.create(game);
+        final Game gameSaved = this.gameService.create(this.getUserLogged(), game);
         this.createPublishEvent(gameSaved, uriBuilder, response);
     }
 
@@ -62,7 +62,7 @@ public class GameResource extends AbstractResource<Game> {
     @ResponseStatus(HttpStatus.OK)
     public void update(@PathVariable("id") final Long id, @Valid @RequestBody final Game game) {
         this.checkRequiredUpdateInternal(id, game);
-        this.gameService.update(game);
+        this.gameService.update(this.getUserLogged(), game);
     }
 
     @DeleteMapping(value = "/{id}")
@@ -70,8 +70,7 @@ public class GameResource extends AbstractResource<Game> {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable("id") final Long id) {
         this.checkRequiredPrimaryKeyDeleteInternal(id);
-        final Optional<Game> game = this.gameService.findById(this.getUserLogged(), id);
-        this.gameService.delete(game.get());
+        this.gameService.delete(this.getUserLogged(), id);
     }
 
     @GetMapping(value = "/{id}")
