@@ -30,27 +30,31 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User create(final User user) {
-        ServicePreconditions.checkEntityExists(user);
-        return this.userRepository.save(user);
+    public User create(final User userLogged, final User user) {
+        //TODO
+        return null;
     }
 
     @Override
-    public User update(final User user) {
+    public User update(final User userLogged, final User user) {
+        ServicePreconditions.checkEntityExists(userLogged);
         ServicePreconditions.checkEntityExists(user);
+        ServicePreconditions.checkResourceOwner(userLogged.getId(), user.getId());
         return this.userRepository.saveAndFlush(user);
     }
 
     @Override
-    public void delete(final User user) {
-        ServicePreconditions.checkParameterLong(user.getId());
-        this.userRepository.delete(user);
+    public void delete(final User userLogged, final Long id) {
+        final Optional<User> user = this.findById(userLogged, id);
+        this.userRepository.delete(user.get());
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<User> findById(final Long id) {
+    public Optional<User> findById(final User userLogged, final Long id) {
+        ServicePreconditions.checkEntityExists(userLogged);
         ServicePreconditions.checkParameterLong(id);
+        ServicePreconditions.checkResourceOwner(userLogged.getId(), id);
         final Optional<User> user = this.userRepository.findOne(Specification.where(UserSpecification.findById(id)));
         ServicePreconditions.checkEntityExists(user.isPresent());
         return user;

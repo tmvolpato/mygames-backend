@@ -32,4 +32,6 @@ public class GeneratorPassword {
 
         System.out.print(rv.encode("admin123"));
     }
+
+
 }

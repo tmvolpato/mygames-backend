@@ -19,6 +19,7 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.oauth2.common.exceptions.InvalidTokenException;
 import org.springframework.security.oauth2.common.exceptions.UnauthorizedClientException;
 import org.springframework.security.oauth2.common.exceptions.UnauthorizedUserException;
@@ -80,7 +81,7 @@ public class MyGamesExceptionHandler extends ResponseEntityExceptionHandler {
      * Erro: 401
      * @return
      */
-    @ExceptionHandler(value = { InvalidTokenException.class, UnauthorizedClientException.class, UnauthorizedUserException.class})
+    @ExceptionHandler(value = { InvalidTokenException.class, UnauthorizedClientException.class, UnauthorizedUserException.class })
     public final ResponseEntity<Object> handleAuthenticationCredentialsNotFoundException(final RuntimeException ex, final WebRequest request) {
         return handleExceptionInternal(ex, this.createMessageError("unathorized", this.messageDevCheked(ex.getLocalizedMessage())), new HttpHeaders(), HttpStatus.UNAUTHORIZED, request);
     }

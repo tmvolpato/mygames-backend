@@ -15,7 +15,7 @@ import java.util.Optional;
  * @since 2017
  * @version 1.0.0
  */
-public interface GameService extends IRawService<Game> {
+public interface GameService extends IRawService<User, Game> {
 
     Optional<Game> findById(User user, Long id);
     Page<Game> findAllPaginatedAndFilter(User userLogged, GameFilter gameFilter, int page, int size);

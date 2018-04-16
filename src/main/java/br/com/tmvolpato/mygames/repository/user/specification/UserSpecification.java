@@ -24,10 +24,13 @@ public final class UserSpecification {
      * @return
      */
     public static Specification<User> findById(final Long id) {
-        return (root, criteriaQuery, criteriaBuilder) -> {
+        return ((root, criteriaQuery, criteriaBuilder) -> {
+            root
+                    .fetch(User_.roles, JoinType.LEFT)
+                    .fetch(Role_.privileges, JoinType.LEFT);
             final Expression<Long> property = root.get(User_.id);
             return criteriaBuilder.equal(property, id);
-        };
+        });
     }
 
     /**
@@ -37,12 +40,12 @@ public final class UserSpecification {
      * @return
      */
     public static Specification<User> findByEmail(final String email) {
-        return (root, criteriaQuery, criteriaBuilder) -> {
+        return ((root, criteriaQuery, criteriaBuilder) -> {
             root
                     .fetch(User_.roles, JoinType.LEFT)
                     .fetch(Role_.privileges, JoinType.LEFT);
             final Expression<String> property = root.get(User_.email);
             return criteriaBuilder.equal(property, email);
-        };
+        });
     }
 }
