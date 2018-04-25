@@ -11,7 +11,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * Classe abstrata para todas as entidades persistidas.
+ * Abstract class.
  *
  * @author Thiago Michel Volpato
  * @version 1.0.0

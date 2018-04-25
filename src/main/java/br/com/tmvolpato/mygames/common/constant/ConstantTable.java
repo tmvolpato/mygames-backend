@@ -18,7 +18,6 @@ public final class ConstantTable {
     public static final String PRIVILEGE = "privilege";
     public static final String USER_HAS_ROLE = "user_has_role";
     public static final String ROLE_HAS_PRIVILEGE = "role_has_privilege";
-    public static final String GAME_HAS_USER = "game_has_user";
 
     private ConstantTable() {
         throw new AssertionError();

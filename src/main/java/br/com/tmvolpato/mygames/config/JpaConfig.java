@@ -20,7 +20,7 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 /**
- * Classe de configuração do persistence.
+ * JPA configuration class.
  *
  * @author Thiago Michel Volpato
  * @sice 2017
@@ -61,7 +61,7 @@ public class JpaConfig {
     public DataSourceInitializer dataSourceInitializer() {
         final DataSourceInitializer initializer = new DataSourceInitializer();
         initializer.setDataSource(this.dataSource());
-        //initializer.setDatabasePopulator(databasePopulator());
+        initializer.setDatabasePopulator(this.databasePopulator());
         return initializer;
     }
 
@@ -87,7 +87,7 @@ public class JpaConfig {
         return new PersistenceExceptionTranslationPostProcessor();
     }
 
-    private final Properties additionalProperties() {
+    private Properties additionalProperties() {
         final Properties hibernateProperties = new Properties();
         hibernateProperties.setProperty("hibernate.show_sql", this.env.getProperty("hibernate.show-sql"));
         hibernateProperties.setProperty("hibernate.format_sql", this.env.getProperty("hibernate.format-sql"));

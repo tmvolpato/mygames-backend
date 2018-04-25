@@ -5,14 +5,14 @@ INSERT INTO company(name, date_time_inclusion) VALUES('Konami', current_timestam
 INSERT INTO company(name, date_time_inclusion) VALUES('Nintendo', current_timestamp);
 INSERT INTO company(name, date_time_inclusion) VALUES('Bethesda', current_timestamp);
 
-INSERT INTO genre(name, date_time_inclusion) VALUES('Ação', current_timestamp);
-INSERT INTO genre(name, date_time_inclusion) VALUES('Aventura', current_timestamp);
-INSERT INTO genre(name, date_time_inclusion) VALUES('Estratégia', current_timestamp);
+INSERT INTO genre(name, date_time_inclusion) VALUES('Action', current_timestamp);
+INSERT INTO genre(name, date_time_inclusion) VALUES('Adventure', current_timestamp);
+INSERT INTO genre(name, date_time_inclusion) VALUES('Strategy', current_timestamp);
 INSERT INTO genre(name, date_time_inclusion) VALUES('RPG', current_timestamp);
-INSERT INTO genre(name, date_time_inclusion) VALUES('Esporte', current_timestamp);
-INSERT INTO genre(name, date_time_inclusion) VALUES('Corrida', current_timestamp);
-INSERT INTO genre(name, date_time_inclusion) VALUES('Simulação', current_timestamp);
-INSERT INTO genre(name, date_time_inclusion) VALUES('Outros gêneros', current_timestamp);
+INSERT INTO genre(name, date_time_inclusion) VALUES('Sport', current_timestamp);
+INSERT INTO genre(name, date_time_inclusion) VALUES('Running', current_timestamp);
+INSERT INTO genre(name, date_time_inclusion) VALUES('Simulation', current_timestamp);
+INSERT INTO genre(name, date_time_inclusion) VALUES('Other genres', current_timestamp);
 
 INSERT INTO platform(name, date_time_inclusion) VALUES ('Xbox One', current_timestamp);
 INSERT INTO platform(name, date_time_inclusion) VALUES('Xbox One X', current_timestamp);
@@ -49,5 +49,5 @@ INSERT INTO game(title, price, platform_id, company_id, genre_id, user_id, date_
 INSERT INTO game(title, price, platform_id, company_id, genre_id, user_id, date_time_inclusion) VALUES ('Dark SOULS II', 60.00, 3, 2, 4, 1, CURRENT_DATE);
 INSERT INTO game(title, price, platform_id, company_id, genre_id, user_id, date_time_inclusion) VALUES ('Dark SOULS III', 145.00, 4, 2, 4, 1, CURRENT_DATE);
 
-INSERT INTO game(title, price, platform_id, company_id, genre_id, user_id, date_time_inclusion) VALUES ('Monster Hunter', 200.00, 4, 3, 4, 1, CURRENT_DATE);
-INSERT INTO game(title, price, platform_id, company_id, genre_id, user_id, date_time_inclusion) VALUES ('Pro Evolution 2017', 150.00, 4, 4, 5, 1, CURRENT_DATE);
+INSERT INTO game(title, price, platform_id, company_id, genre_id, user_id, date_time_inclusion) VALUES ('Monster Hunter', 200.00, 4, 3, 4, 2, CURRENT_DATE);
+INSERT INTO game(title, price, platform_id, company_id, genre_id, user_id, date_time_inclusion) VALUES ('Pro Evolution 2017', 150.00, 4, 4, 5, 2, CURRENT_DATE);

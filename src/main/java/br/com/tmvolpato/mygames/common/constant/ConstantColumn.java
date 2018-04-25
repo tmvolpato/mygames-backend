@@ -27,11 +27,7 @@ public final class ConstantColumn {
     public static final String ROLE_ID = "role_id";
     public static final String PRIVILEGE_ID = "privilege_id";
     public static final String COMPANY_ID = "company_id";
-    public static final String GAME_ID = "game_id";
     public static final String USER_ID = "user_id";
-
-
-
 
     private ConstantColumn() {
         throw new AssertionError();
