@@ -1,7 +1,7 @@
 package br.com.tmvolpato.mygames.model;
 
 import br.com.tmvolpato.mygames.common.constant.ConstantColumn;
-import br.com.tmvolpato.mygames.common.constant.ConstantMessageValidation;
+import br.com.tmvolpato.mygames.common.constant.ConstraintMessageValidation;
 import br.com.tmvolpato.mygames.common.constant.ConstantNumeric;
 import br.com.tmvolpato.mygames.common.constant.ConstantTable;
 import lombok.EqualsAndHashCode;
@@ -9,20 +9,20 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 /**
- * Classe empresa.
+ * Company class.
  *
  * @author Thiago Michel Volpato
  * @version 1.0.0
  * @sice 2017
  */
 @Entity
-@Table(name = ConstantTable.COMPANY)
+@Table(name = ConstantTable.COMPANY, uniqueConstraints =
+@UniqueConstraint(name = "name_uk", columnNames = { "name" }), indexes =
+@Index(name = "idx_name", columnList = "name", unique = true))
 @ToString(of = { "id" })
 @EqualsAndHashCode(of = { "id" }, callSuper = false)
 public class Company extends AbstractPersistable {
@@ -34,7 +34,13 @@ public class Company extends AbstractPersistable {
 
     @Getter
     @Setter
-    @NotBlank(message = ConstantMessageValidation.NAME_NOT_BLANK)
+    @NotBlank(message = ConstraintMessageValidation.NAME_NOT_BLANK)
     @Column(name = ConstantColumn.NAME, nullable = false, unique = true, length = ConstantNumeric.TWO_HUNDRED)
     private String name;
+
+    public Company() {}
+
+    public Company(final String name) {
+        this.name = name;
+    }
 }

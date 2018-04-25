@@ -1,7 +1,7 @@
 package br.com.tmvolpato.mygames.model;
 
 import br.com.tmvolpato.mygames.common.constant.ConstantColumn;
-import br.com.tmvolpato.mygames.common.constant.ConstantMessageValidation;
+import br.com.tmvolpato.mygames.common.constant.ConstraintMessageValidation;
 import br.com.tmvolpato.mygames.common.constant.ConstantNumeric;
 import br.com.tmvolpato.mygames.common.constant.ConstantTable;
 import lombok.EqualsAndHashCode;
@@ -15,7 +15,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
 /**
- * Classe privilegio.
+ * Privilege class.
  *
  * @author Thiago Michel Volpato
  * @sice 2017
@@ -34,8 +34,8 @@ public class Privilege extends AbstractPersistable {
 
     @Getter
     @Setter
-    @NotBlank(message = ConstantMessageValidation.NAME_NOT_BLANK)
-    @Column(name = ConstantColumn.NAME, nullable = false, length = ConstantNumeric.ONE_HUNDRED)
+    @NotBlank(message = ConstraintMessageValidation.NAME_NOT_BLANK)
+    @Column(name = ConstantColumn.NAME, nullable = false, unique = true, length = ConstantNumeric.ONE_HUNDRED)
     private String name;
 
     public Privilege() {}

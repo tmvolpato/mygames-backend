@@ -1,6 +1,5 @@
 package br.com.tmvolpato.mygames.common.util;
 
-import br.com.tmvolpato.mygames.service.security.BSPasswordEncoder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -9,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Classe que encoda a senha.
+ * Generator password.
  *
  * @author Thiago Michel Volpato
  * @version 1.0.0
@@ -17,21 +16,23 @@ import java.util.Map;
  */
 public class GeneratorPassword {
 
-    public static void main(String[] args) {
-        String idForEncode = "bcrypt";
+    /**
+     * Encode ID.
+     */
+    private static final String ENCODE_ID = "bcrypt";
+
+    /**
+     * Encode password.
+     *
+     * @param password
+     * @return
+     */
+    public static String encode(final String password) {
+        final String idForEncode = ENCODE_ID;
         final BCryptPasswordEncoder defaultEncoder = new BCryptPasswordEncoder();
-
-
         final Map<String, PasswordEncoder> encoders = new HashMap<>();
         encoders.put(idForEncode, defaultEncoder);
-        //encoders.put("bcrypt", new BCryptPasswordEncoder());
-        //encoders.put("scrypt", new SCryptPasswordEncoder());
-
-        final DelegatingPasswordEncoder rv = new DelegatingPasswordEncoder(idForEncode, encoders);
-        //rv.setDefaultPasswordEncoderForMatches(new BSPasswordEncoder());
-
-        System.out.print(rv.encode("admin123"));
+        final DelegatingPasswordEncoder delegatingPasswordEncoder = new DelegatingPasswordEncoder(idForEncode, encoders);
+        return delegatingPasswordEncoder.encode(password);
     }
-
-
 }
