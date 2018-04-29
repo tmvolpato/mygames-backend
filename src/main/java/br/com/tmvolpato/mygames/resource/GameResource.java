@@ -51,7 +51,7 @@ public class GameResource extends AbstractResource<Game> {
         this.userService = userService;
     }
 
-    @PostMapping()
+    @PostMapping
     @PreAuthorize("hasAnyAuthority('ADMIN', 'USER') and #oauth2.hasScope('write')")
     @ResponseStatus(HttpStatus.CREATED)
     @ApiOperation(value = "Add a new game")
