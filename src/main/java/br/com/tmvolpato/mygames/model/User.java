@@ -2,6 +2,7 @@ package br.com.tmvolpato.mygames.model;
 
 import br.com.tmvolpato.mygames.common.constant.*;
 import br.com.tmvolpato.mygames.common.util.GeneratorPassword;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -39,6 +40,7 @@ public class User extends AbstractPersistable {
     @Setter
     @NotBlank(message = ConstraintMessageValidation.NAME_NOT_BLANK)
     @Column(name = ConstantColumn.NAME, nullable = false, length = ConstantNumeric.ONE_HUNDRED)
+    @ApiModelProperty(notes = "The name of user", required = true)
     private String name;
 
     @Getter
@@ -46,17 +48,20 @@ public class User extends AbstractPersistable {
     @NotBlank(message = ConstraintMessageValidation.EMAIL_NOT_BLANK)
     @Email(message = ConstraintMessageValidation.EMAIL_VALIDATE, regexp = ConstantRegexp.EMAIL_PATTERN)
     @Column(name = ConstantColumn.EMAIL, nullable = false, unique = true, length = ConstantNumeric.ONE_HUNDRED)
+    @ApiModelProperty(notes = "E-mail of user", required = true)
     private String email;
 
     @Getter
     @Setter
     @NotBlank(message = ConstraintMessageValidation.PASSWORD_NOT_BLANK)
     @Column(name = ConstantColumn.PASSWORD, nullable = false)
+    @ApiModelProperty(notes = "Password of user", required = true)
     private String password;
 
     @Getter
     @Setter
     @Column(name = ConstantColumn.ENABLED)
+    @ApiModelProperty(notes = "User active yes or no", hidden = true)
     private boolean enabled;
 
     @Getter

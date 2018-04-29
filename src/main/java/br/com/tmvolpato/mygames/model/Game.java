@@ -5,6 +5,7 @@ import br.com.tmvolpato.mygames.common.constant.ConstraintMessageValidation;
 import br.com.tmvolpato.mygames.common.constant.ConstantNumeric;
 import br.com.tmvolpato.mygames.common.constant.ConstantTable;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -42,33 +43,41 @@ public class Game extends AbstractPersistable {
     @Setter
     @NotBlank(message = ConstraintMessageValidation.TITLE_NOT_BLANK)
     @Column(name = ConstantColumn.TITLE, unique = true, length = ConstantNumeric.TWO_HUNDRED)
+    @ApiModelProperty(notes = "The title of game", required = true)
     private String title;
 
     @Getter
     @Setter
     @NotNull(message = ConstraintMessageValidation.PRICE_NOT_NULL)
     @Column(name = ConstantColumn.PRICE, nullable = false, precision = ConstantNumeric.TEN, scale = ConstantNumeric.TWO)
+    @ApiModelProperty(notes = "The price of game", required = true)
     private BigDecimal price;
 
     @Getter
     @Setter
     @NotNull(message = ConstraintMessageValidation.PLATFORM_NOT_NULL)
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = ConstantColumn.PLATFORM_ID, nullable = false, referencedColumnName = ConstantColumn.ID, foreignKey = @ForeignKey(name = FK + ConstantColumn.PLATFORM))
+    @JoinColumn(name = ConstantColumn.PLATFORM_ID, nullable = false, referencedColumnName = ConstantColumn.ID,
+            foreignKey = @ForeignKey(name = FK + ConstantColumn.PLATFORM))
+    @ApiModelProperty(notes = "Platform of game", required = true)
     private Platform platform;
 
     @Getter
     @Setter
     @NotNull(message = ConstraintMessageValidation.COMPANY_NOT_NULL)
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = ConstantColumn.COMPANY_ID, nullable = false, referencedColumnName = ConstantColumn.ID, foreignKey = @ForeignKey(name = FK + ConstantColumn.COMPANY))
+    @JoinColumn(name = ConstantColumn.COMPANY_ID, nullable = false, referencedColumnName = ConstantColumn.ID,
+            foreignKey = @ForeignKey(name = FK + ConstantColumn.COMPANY))
+    @ApiModelProperty(notes = "Company of game", required = true)
     private Company company;
 
     @Getter
     @Setter
     @NotNull(message = ConstraintMessageValidation.GENRE_NOT_NULL)
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = ConstantColumn.GENRE_ID, nullable = false, referencedColumnName = ConstantColumn.ID, foreignKey = @ForeignKey(name = FK + ConstantColumn.GENRE))
+    @JoinColumn(name = ConstantColumn.GENRE_ID, nullable = false, referencedColumnName = ConstantColumn.ID,
+            foreignKey = @ForeignKey(name = FK + ConstantColumn.GENRE))
+    @ApiModelProperty(notes = "Genre of game", required = true)
     private Genre genre;
 
     @JsonIgnore
@@ -76,7 +85,9 @@ public class Game extends AbstractPersistable {
     @Setter
     @NotNull(message = ConstraintMessageValidation.USER_NOT_NULL)
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = ConstantColumn.USER_ID,  nullable = false, referencedColumnName = ConstantColumn.ID, foreignKey = @ForeignKey(name = FK + ConstantColumn.USER))
+    @JoinColumn(name = ConstantColumn.USER_ID,  nullable = false, referencedColumnName = ConstantColumn.ID,
+            foreignKey = @ForeignKey(name = FK + ConstantColumn.USER))
+    @ApiModelProperty(notes = "User of system", required = true)
     private User user;
 
 

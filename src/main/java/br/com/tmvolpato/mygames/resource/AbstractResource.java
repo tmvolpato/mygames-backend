@@ -9,6 +9,7 @@ import br.com.tmvolpato.mygames.common.web.event.PaginatedResultsRetrievedEvent;
 import br.com.tmvolpato.mygames.common.web.event.SingleResourceRetrievedEvent;
 import br.com.tmvolpato.mygames.common.web.exception.MyBadRequestException;
 import br.com.tmvolpato.mygames.common.web.exception.MyResourceNotFoundException;
+import br.com.tmvolpato.mygames.common.web.exception.MyUnauthorizedException;
 import br.com.tmvolpato.mygames.service.ServicePreconditions;
 import com.google.common.base.Preconditions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.regex.Pattern;
 
 /**
- * Classe abstrata para recursos.
+ * Abstract class to the resources.
  *
  * @author Thiago Michel Volpato
  * @since 2017
@@ -108,11 +109,11 @@ public abstract class AbstractResource<T extends IEntity> {
     protected String getPrincipal() {
         final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        if (authentication != null || authentication.getPrincipal() != null) {
-            return authentication.getPrincipal().toString();
+        if (authentication == null || authentication.getPrincipal().equals("") ||
+                authentication.getPrincipal() == null) {
+            throw new MyUnauthorizedException();
 
         }
-        return null;
-
+        return authentication.getPrincipal().toString();
     }
 }

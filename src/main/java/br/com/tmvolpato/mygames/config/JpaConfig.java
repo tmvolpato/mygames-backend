@@ -61,7 +61,7 @@ public class JpaConfig {
     public DataSourceInitializer dataSourceInitializer() {
         final DataSourceInitializer initializer = new DataSourceInitializer();
         initializer.setDataSource(this.dataSource());
-        initializer.setDatabasePopulator(this.databasePopulator());
+        //initializer.setDatabasePopulator(this.databasePopulator());
         return initializer;
     }
 
