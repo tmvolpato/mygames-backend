@@ -3,6 +3,7 @@ package br.com.tmvolpato.mygames.common.web.exceptionhandler;
 import br.com.tmvolpato.mygames.common.web.exception.MyConflictException;
 import br.com.tmvolpato.mygames.common.web.exception.MyEntityNotFoundException;
 import br.com.tmvolpato.mygames.common.web.exception.MyResourceNotFoundException;
+import br.com.tmvolpato.mygames.common.web.exception.MyUnauthorizedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,7 +82,7 @@ public class MyGamesExceptionHandler extends ResponseEntityExceptionHandler {
      * Erro: 401
      * @return
      */
-    @ExceptionHandler(value = { InvalidTokenException.class, UnauthorizedClientException.class, UnauthorizedUserException.class })
+    @ExceptionHandler(value = { InvalidTokenException.class, MyUnauthorizedException.class, UnauthorizedClientException.class, UnauthorizedUserException.class })
     public final ResponseEntity<Object> handleAuthenticationCredentialsNotFoundException(final RuntimeException ex, final WebRequest request) {
         return handleExceptionInternal(ex, this.createMessageError("unathorized", this.messageDevCheked(ex.getLocalizedMessage())), new HttpHeaders(), HttpStatus.UNAUTHORIZED, request);
     }

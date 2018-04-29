@@ -4,6 +4,7 @@ import br.com.tmvolpato.mygames.common.constant.ConstantColumn;
 import br.com.tmvolpato.mygames.common.constant.ConstraintMessageValidation;
 import br.com.tmvolpato.mygames.common.constant.ConstantNumeric;
 import br.com.tmvolpato.mygames.common.constant.ConstantTable;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -38,6 +39,7 @@ public class Role extends AbstractPersistable {
     @Setter
     @NotBlank(message = ConstraintMessageValidation.NAME_NOT_BLANK)
     @Column(name = ConstantColumn.NAME, nullable = false, unique = true, length = ConstantNumeric.TWO_HUNDRED)
+    @ApiModelProperty(notes = "The name of role", required = true)
     private String name;
 
     @Getter

@@ -1,5 +1,6 @@
 package br.com.tmvolpato.mygames.config.security;
 
+import br.com.tmvolpato.mygames.common.web.util.Mappings;
 import br.com.tmvolpato.mygames.service.security.BSPasswordEncoder;
 import br.com.tmvolpato.mygames.service.security.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,6 +79,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .authorizeRequests().antMatchers(Mappings.DOCUMENTATION_API).permitAll()
                 .and()
                 .httpBasic()
                 .realmName(this.securityRealm)

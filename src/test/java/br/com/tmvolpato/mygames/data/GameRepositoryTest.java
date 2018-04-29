@@ -23,7 +23,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Unit test of GamesRepository.
+ * Unit test of GameRepository.
  *
  * @author Thiago Michel Volpato
  * @version 1.0.0

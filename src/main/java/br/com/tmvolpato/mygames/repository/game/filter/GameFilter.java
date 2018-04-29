@@ -4,7 +4,6 @@ import br.com.tmvolpato.mygames.model.Company;
 import br.com.tmvolpato.mygames.model.Genre;
 import br.com.tmvolpato.mygames.model.Platform;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.math.BigDecimal;
 
@@ -18,22 +17,17 @@ import java.math.BigDecimal;
 public class GameFilter {
 
     @Getter
-    @Setter
     private String title;
 
     @Getter
-    @Setter
     private Platform platform;
 
     @Getter
-    @Setter
     private Company company;
 
     @Getter
-    @Setter
     private Genre genre;
 
     @Getter
-    @Setter
     private BigDecimal price;
 }

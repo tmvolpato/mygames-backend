@@ -11,8 +11,10 @@ import br.com.tmvolpato.mygames.common.constant.ConstantWeb;
  */
 public final class Mappings {
 
+    public static final String DOCUMENTATION_API = ConstantWeb.SLASH + "documentation-api";
     public static final String USERS = ConstantWeb.API + "users";
     public static final String GAMES = ConstantWeb.API + "games";
+
 
 
     private Mappings() {
