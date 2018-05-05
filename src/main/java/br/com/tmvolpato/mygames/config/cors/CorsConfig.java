@@ -54,7 +54,7 @@ public class CorsConfig {
 
         configAuthentication.setMaxAge(3600L);
 
-        urlBaseCors.registerCorsConfiguration(ConstantWeb.SLASH, configAuthentication);
+        urlBaseCors.registerCorsConfiguration("/**", configAuthentication);
 
         final FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean(new CorsFilter(urlBaseCors));
         filterRegistrationBean.setOrder(Ordered.HIGHEST_PRECEDENCE);
