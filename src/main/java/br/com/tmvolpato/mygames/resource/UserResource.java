@@ -71,7 +71,7 @@ public class UserResource extends AbstractResource<User>{
                                              @PathVariable("id") final Long id, final UriComponentsBuilder uriBuilder,
                                              final HttpServletResponse response) {
 
-        final Optional<User> userFound = this.userService.findById(null, id);
+        final Optional<User> userFound = this.userService.findById(this.getUserLogged(), id);
         this.checkRequiredSingleResourceInternal(userFound.get());
         this.singlePublishEvent(uriBuilder, response);
         return ResponseEntity.status(HttpStatus.OK)

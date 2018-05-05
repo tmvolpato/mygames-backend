@@ -1,5 +1,6 @@
 package br.com.tmvolpato.mygames.common.web.listener;
 
+import br.com.tmvolpato.mygames.common.constant.ConstantWeb;
 import org.springframework.stereotype.Component;
 
 /**
@@ -18,6 +19,6 @@ public class SecResourceCreatedDiscoverabilityListener extends ResourceCreateDis
 
     @Override
     protected final String getBase() {
-        return "/";
+        return ConstantWeb.SLASH;
     }
 }

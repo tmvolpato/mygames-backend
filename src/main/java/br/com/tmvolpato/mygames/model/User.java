@@ -2,7 +2,10 @@ package br.com.tmvolpato.mygames.model;
 
 import br.com.tmvolpato.mygames.common.constant.*;
 import br.com.tmvolpato.mygames.common.util.GeneratorPassword;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonAppend;
 import io.swagger.annotations.ApiModelProperty;
+import jdk.nashorn.internal.ir.annotations.Ignore;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,8 +14,6 @@ import lombok.ToString;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -51,6 +52,7 @@ public class User extends AbstractPersistable {
     @ApiModelProperty(notes = "E-mail of user", required = true)
     private String email;
 
+    @JsonIgnore
     @Getter
     @Setter
     @NotBlank(message = ConstraintMessageValidation.PASSWORD_NOT_BLANK)
@@ -58,16 +60,16 @@ public class User extends AbstractPersistable {
     @ApiModelProperty(notes = "Password of user", required = true)
     private String password;
 
+    @JsonIgnore
     @Getter
     @Setter
     @Column(name = ConstantColumn.ENABLED)
     @ApiModelProperty(notes = "User active yes or no", hidden = true)
     private boolean enabled;
 
+    @JsonIgnore
     @Getter
     @Setter
-    @NotEmpty(message = ConstraintMessageValidation.ROLE_NOT_NULL_OR_EMPTY)
-    @NotNull(message = ConstraintMessageValidation.ROLE_NOT_NULL_OR_EMPTY)
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = ConstantTable.USER_HAS_ROLE,
             joinColumns = @JoinColumn(name = ConstantColumn.USER_ID, referencedColumnName = ConstantColumn.ID),
@@ -103,10 +105,6 @@ public class User extends AbstractPersistable {
      * @param roles
      */
     private void addRoles(final Set<Role> roles) {
-        if (roles == null || roles.isEmpty()) {
-            return;
-        }
-
         if (this.roles == null) {
             this.roles = new HashSet<>();
         }

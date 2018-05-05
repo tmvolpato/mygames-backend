@@ -11,6 +11,8 @@ public final class ConstantWeb {
 
     public static final String SLASH = "/";
     public static final String API = "api" + SLASH;
+    public static final String PUBLIC = "public" + SLASH;
+    public static final String RESTRICT = "restrict" + SLASH;
 
 
     private ConstantWeb() {

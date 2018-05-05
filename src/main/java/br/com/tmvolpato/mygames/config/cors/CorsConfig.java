@@ -1,5 +1,6 @@
 package br.com.tmvolpato.mygames.config.cors;
 
+import br.com.tmvolpato.mygames.common.constant.ConstantWeb;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

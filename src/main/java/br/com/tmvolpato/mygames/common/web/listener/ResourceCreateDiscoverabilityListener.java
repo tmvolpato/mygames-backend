@@ -45,7 +45,7 @@ public abstract class ResourceCreateDiscoverabilityListener implements Applicati
 
     private String buildPathResource(final Class clazz) {
         final String resourceName = this.uriMapper.getUriBase(clazz);
-        return ConstantWeb.API + resourceName + "/{id}";
+        return ConstantWeb.RESTRICT + resourceName + "/{id}";
     }
 
     protected abstract String getBase();
