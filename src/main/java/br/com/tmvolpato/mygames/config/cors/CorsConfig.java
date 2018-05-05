@@ -1,5 +1,6 @@
 package br.com.tmvolpato.mygames.config.cors;
 
+import br.com.tmvolpato.mygames.common.constant.ConstantWeb;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -53,7 +54,7 @@ public class CorsConfig {
 
         configAuthentication.setMaxAge(3600L);
 
-        urlBaseCors.registerCorsConfiguration("/**", configAuthentication);
+        urlBaseCors.registerCorsConfiguration(ConstantWeb.SLASH, configAuthentication);
 
         final FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean(new CorsFilter(urlBaseCors));
         filterRegistrationBean.setOrder(Ordered.HIGHEST_PRECEDENCE);

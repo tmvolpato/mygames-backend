@@ -12,7 +12,7 @@ import org.springframework.security.oauth2.provider.error.OAuth2AccessDeniedHand
 import org.springframework.security.oauth2.provider.token.ResourceServerTokenServices;
 
 /**
- * Recurso do servidor.
+ * Resource server configuration.
  *
  * @author Thiago Michel Volpato
  * @version 1.0.0
@@ -40,9 +40,7 @@ public class OAuth2ResourceServerConfig extends ResourceServerConfigurerAdapter 
                 .and()
                 .headers().cacheControl().disable()
                 .and()
-                .authorizeRequests().antMatchers("/doc/**").permitAll()
-                .and()
-                .authorizeRequests().antMatchers("/api/**").authenticated()
+                .authorizeRequests().antMatchers("/api/restrict/**").authenticated()
                 .and()
                 .exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler())
                 .and()

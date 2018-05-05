@@ -33,7 +33,7 @@ public final class MultipleResourcesRetrievedDiscoverabilityListener implements 
     }
 
     final void discoverOtherRetrievalOperations(final UriComponentsBuilder uriBuilder, final HttpServletResponse response, final Class clazz) {
-        final String uriForResourceCreation = uriBuilder.path(ConstantWeb.API + uriMapper.getUriBase(clazz) + "/q=name=something").build().toUriString();
+        final String uriForResourceCreation = uriBuilder.path(ConstantWeb.RESTRICT + uriMapper.getUriBase(clazz) + "/q=name=something").build().toUriString();
 
         final String linkHeaderValue = LinkUtil.createLinkHeader(uriForResourceCreation, LinkUtil.REL_COLLECTION);
         response.addHeader(HttpHeaders.LINK, linkHeaderValue);

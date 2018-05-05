@@ -90,7 +90,6 @@ public class Game extends AbstractPersistable {
     @ApiModelProperty(notes = "User of system", required = true)
     private User user;
 
-
     public Game() {}
 
     public Game(final String title, final BigDecimal price, final Platform platform, final Company company,

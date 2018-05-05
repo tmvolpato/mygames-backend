@@ -112,6 +112,6 @@ public class PaginatedResultsRetrievedDiscoverabilityListener implements Applica
 
     protected void plural(final UriComponentsBuilder uriBuilder, final Class clazz) {
         final String resourceName = this.uriMapper.getUriBase(clazz);
-        uriBuilder.path(ConstantWeb.API + resourceName);
+        uriBuilder.path(ConstantWeb.RESTRICT + resourceName);
     }
 }

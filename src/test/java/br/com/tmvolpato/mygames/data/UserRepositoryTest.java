@@ -17,7 +17,6 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.validation.ConstraintViolationException;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -121,22 +120,6 @@ public class UserRepositoryTest {
 
         final User userTwo = new User("User Test", "user@email.com", "admin@test", this.createRoles());
         this.repository.save(userTwo);
-    }
-
-    @Test
-    public void createWhenRolesIsNullShouldThrownConstraintViolationException() {
-        this.thrown.expect(ConstraintViolationException.class);
-
-        final User user = new User("User Test", "user@email.com", "admin@test", null);
-        this.repository.save(user);
-    }
-
-    @Test
-    public void createWhenRolesIsEmptyShouldThrownConstraintViolationException() {
-        this.thrown.expect(ConstraintViolationException.class);
-
-        final User user = new User("User Test", "user@email.com", "admin@test", Collections.emptySet());
-        this.repository.save(user);
     }
 
     private User createUser() {

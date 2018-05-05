@@ -1,7 +1,7 @@
 package br.com.tmvolpato.mygames.common.constant;
 
 /**
- * Mensagens de validação.
+ * Message of validation.
  *
  * @author Thiago Michel Volpato
  * @since 2017
@@ -19,8 +19,6 @@ public final class ConstraintMessageValidation {
     public static final String GENRE_NOT_NULL = "genre.not.null";
     public static final String PRICE_NOT_NULL = "price.not.null";
     public static final String USER_NOT_NULL = "user.not.null";
-    public static final String ROLE_NOT_NULL = "role.not.null";
-    public static final String ROLE_NOT_NULL_OR_EMPTY = "role.not.null.or.empty";
 
     private ConstraintMessageValidation() {
         throw new AssertionError();
