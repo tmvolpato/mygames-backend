@@ -109,8 +109,7 @@ public abstract class AbstractResource<T extends IEntity> {
     protected String getPrincipal() {
         final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        if (authentication == null || authentication.getPrincipal().equals("") ||
-                authentication.getPrincipal() == null) {
+        if (authentication == null || authentication.getPrincipal() == null || authentication.getPrincipal().equals("") ) {
             throw new MyUnauthorizedException();
 
         }
