@@ -52,7 +52,7 @@ public class User extends AbstractPersistable {
     @ApiModelProperty(notes = "E-mail of user", required = true)
     private String email;
 
-    @JsonIgnore
+    //@JsonIgnore
     @Getter
     @Setter
     @NotBlank(message = ConstraintMessageValidation.PASSWORD_NOT_BLANK)
