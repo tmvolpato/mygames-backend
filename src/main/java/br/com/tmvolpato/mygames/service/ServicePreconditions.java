@@ -1,6 +1,7 @@
 package br.com.tmvolpato.mygames.service;
 
 import br.com.tmvolpato.mygames.common.web.exception.MyBadRequestException;
+import br.com.tmvolpato.mygames.common.web.exception.MyConflictException;
 import br.com.tmvolpato.mygames.common.web.exception.MyEntityNotFoundException;
 import br.com.tmvolpato.mygames.common.web.exception.MyResourceNotFoundException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -75,6 +76,16 @@ public final class ServicePreconditions {
         if (!okArgument) {
             throw new MyBadRequestException();
         }
+    }
+
+    /**
+     * Verifica se o valor passado é true é porque já existe.
+     * @param value
+     */
+    public static void checkIfAlreadyExist(final boolean value) {
+       if (value) {
+           throw new MyConflictException();
+       }
     }
 
     /**
