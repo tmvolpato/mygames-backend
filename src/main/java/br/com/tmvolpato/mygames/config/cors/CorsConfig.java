@@ -1,6 +1,5 @@
 package br.com.tmvolpato.mygames.config.cors;
 
-import br.com.tmvolpato.mygames.common.constant.ConstantWeb;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +11,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
 /**
- * Classe de configuração do Cors filter.
+ * Cors filter configuration.
  *
  * @author Thiago Michel Volpato
  * @version 1.0.0

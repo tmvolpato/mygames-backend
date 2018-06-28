@@ -43,7 +43,7 @@ INSERT INTO role_has_privilege(role_id, privilege_id) VALUES (2, 2);
 INSERT INTO oauth_client_details(client_id, resource_ids, client_secret, scope,
                                  authorized_grant_types, web_server_redirect_uri, authorities,
                                  access_token_validity, refresh_token_validity, additional_information, autoapprove) VALUES
-  ('@ngul@r', 'MY_GAMES_ID', 'secret', 'read, write', 'password, refresh_token', null, null, 36000, 36000, null, true);
+  ('angular', 'MY_GAMES_ID', '12345', 'read,write', 'password,refresh_token', null, null, 36000, 36000, null, true);
 
 INSERT INTO game(title, price, platform_id, company_id, genre_id, user_id, date_time_inclusion) VALUES ('Dark SOULS I', 120.00, 3, 2, 4, 1, CURRENT_DATE);
 INSERT INTO game(title, price, platform_id, company_id, genre_id, user_id, date_time_inclusion) VALUES ('Dark SOULS II', 60.00, 3, 2, 4, 1, CURRENT_DATE);
@@ -51,3 +51,4 @@ INSERT INTO game(title, price, platform_id, company_id, genre_id, user_id, date_
 
 INSERT INTO game(title, price, platform_id, company_id, genre_id, user_id, date_time_inclusion) VALUES ('Monster Hunter', 200.00, 4, 3, 4, 2, CURRENT_DATE);
 INSERT INTO game(title, price, platform_id, company_id, genre_id, user_id, date_time_inclusion) VALUES ('Pro Evolution 2017', 150.00, 4, 4, 5, 2, CURRENT_DATE);
+
