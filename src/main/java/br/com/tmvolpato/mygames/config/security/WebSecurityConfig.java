@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.security.authentication.AuthenticationEventPublisher;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -17,10 +16,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
-import org.springframework.security.oauth2.provider.token.TokenStore;
-import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
-import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
@@ -38,17 +33,14 @@ import java.util.Map;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Value("${security.signing-key}")
-    private String signingKey;
-
-    @Value("${security.security-realm}")
-    private String securityRealm;
-
     @Autowired
     private CustomUserDetailsService userDetailsService;
 
     @Autowired
     private AuthenticationEventPublisher authenticationEventPublisher;
+
+    @Value("${security.security-realm}")
+    private String securityRealm;
 
     @Autowired
     public void configure(final AuthenticationManagerBuilder auth) throws Exception {
@@ -81,27 +73,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .exceptionHandling().authenticationEntryPoint((request, response, authException) ->
                 response.sendError(HttpServletResponse.SC_UNAUTHORIZED));
-    }
-
-    @Bean
-    public JwtAccessTokenConverter accessTokenConverter() {
-        final JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-        converter.setSigningKey(this.signingKey);
-        return converter;
-    }
-
-    @Bean
-    public TokenStore jwtTokenStore() {
-        return new JwtTokenStore(this.accessTokenConverter());
-    }
-
-    @Bean
-    @Primary
-    public DefaultTokenServices tokenServices() {
-        final DefaultTokenServices defaultTokenServices = new DefaultTokenServices();
-        defaultTokenServices.setTokenStore(this.jwtTokenStore());
-        defaultTokenServices.setSupportRefreshToken(true);
-        return defaultTokenServices;
     }
 
     @Bean

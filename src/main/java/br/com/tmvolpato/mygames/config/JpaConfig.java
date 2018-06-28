@@ -20,7 +20,7 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 /**
- * JPA configuration class.
+ * JPA configuration.
  *
  * @author Thiago Michel Volpato
  * @sice 2017
@@ -61,11 +61,11 @@ public class JpaConfig {
     public DataSourceInitializer dataSourceInitializer() {
         final DataSourceInitializer initializer = new DataSourceInitializer();
         initializer.setDataSource(this.dataSource());
-        //initializer.setDatabasePopulator(this.databasePopulator());
+        initializer.setDatabasePopulator(this.databasePopulator());
         return initializer;
     }
 
-    @Bean
+    @Bean("dataSource")
     public DataSource dataSource() {
         final DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(this.env.getProperty("jdbc.driverClassName"));

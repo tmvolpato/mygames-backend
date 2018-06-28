@@ -7,7 +7,8 @@ import org.springframework.security.config.annotation.method.configuration.Globa
 import org.springframework.security.oauth2.provider.expression.OAuth2MethodSecurityExpressionHandler;
 
 /**
- * Habilita o metodo oauth2 para uso do escopo.
+ *
+ * Enable the use of method
  *
  * @author Thiago Michel Volpato
  * @version 1.0.0

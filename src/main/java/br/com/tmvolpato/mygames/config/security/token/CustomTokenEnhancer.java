@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Adiciona informações no token
+ * Enhance information in token.
  *
  * @author Thiago Michel Volpato
  * @sice 2017
