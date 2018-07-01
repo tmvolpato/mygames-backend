@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 /**
- * Interfaces repositório do usuário.
+ * Interface repository of user.
  *
  * @author Thiago Michel Volpato
  * @sice 2017

@@ -27,8 +27,8 @@ import java.util.Arrays;
  * @sice 2017
  * @version 1.0.0
  */
-@Configuration
-@EnableAuthorizationServer
+//@Configuration
+//@EnableAuthorizationServer
 public class OAuth2AuthorizationServerInMemoryConfig extends AuthorizationServerConfigurerAdapter {
 
     @Autowired

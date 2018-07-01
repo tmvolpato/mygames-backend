@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /**
- * Repository of class Gênero.
+ * Implementation repository of genre.
  *
  * @author Thiago Michel Volpato
  * @sice 2018

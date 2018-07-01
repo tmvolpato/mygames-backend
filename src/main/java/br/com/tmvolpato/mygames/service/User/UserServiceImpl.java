@@ -1,12 +1,13 @@
 package br.com.tmvolpato.mygames.service.User;
 
-import br.com.tmvolpato.mygames.common.web.exception.MyUnauthorizedException;
+import br.com.tmvolpato.mygames.common.web.exception.MyAccessDeniedException;
 import br.com.tmvolpato.mygames.model.Role;
 import br.com.tmvolpato.mygames.model.User;
 import br.com.tmvolpato.mygames.repository.role.RoleRepository;
 import br.com.tmvolpato.mygames.repository.user.UserRepository;
 import br.com.tmvolpato.mygames.repository.user.specification.UserSpecification;
 import br.com.tmvolpato.mygames.service.ServicePreconditions;
+import br.com.tmvolpato.mygames.service.security.UserApplication;
 import com.google.common.collect.Sets;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
@@ -36,7 +37,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User create(final User userLogged, final User user) {
+    public User create(final UserApplication userApplication, final User user) {
         ServicePreconditions.checkEntityExists(user);
         final Role roleUser = this.roleRepository.findByName("USER");
         final Optional<User> userExist = this.userRepository.findOne(Specification.where(UserSpecification.findByEmail(user.getEmail())));
@@ -47,26 +48,26 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User update(final User userLogged, final User user) {
-        ServicePreconditions.checkEntityExists(userLogged);
+    public User update(final UserApplication userApplication, final User user) {
+        ServicePreconditions.checkUserApplication(userApplication);
         ServicePreconditions.checkEntityExists(user);
-        ServicePreconditions.checkResourceOwner(userLogged.getId(), user.getId());
+        ServicePreconditions.checkResourceOwner(userApplication.getId(), user.getId());
         this.checkRole(user);
         return this.userRepository.saveAndFlush(user);
     }
 
     @Override
-    public void delete(final User userLogged, final Long id) {
-        final Optional<User> user = this.findById(userLogged, id);
+    public void delete(final UserApplication userApplication, final Long id) {
+        final Optional<User> user = this.findById(userApplication, id);
         this.userRepository.delete(user.get());
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Optional<User> findById(final User userLogged, final Long id) {
-        ServicePreconditions.checkEntityExists(userLogged);
+    public Optional<User> findById(final UserApplication userApplication, final Long id) {
+        ServicePreconditions.checkUserApplication(userApplication);
         ServicePreconditions.checkParameterLong(id);
-        ServicePreconditions.checkResourceOwner(userLogged.getId(), id);
+        ServicePreconditions.checkResourceOwner(userApplication.getId(), id);
         final Optional<User> user = this.userRepository.findOne(Specification.where(UserSpecification.findById(id)));
         ServicePreconditions.checkEntityExists(user.isPresent());
         return user;
@@ -87,7 +88,7 @@ public class UserServiceImpl implements UserService {
      */
     private void checkRole(final User user) {
         if (user.getRoles() == null || user.getRoles().isEmpty()) {
-            throw new MyUnauthorizedException();
+            throw new MyAccessDeniedException();
         }
     }
 }

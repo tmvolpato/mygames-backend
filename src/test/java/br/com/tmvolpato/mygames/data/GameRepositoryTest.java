@@ -8,6 +8,7 @@ import br.com.tmvolpato.mygames.repository.platform.PlatformRepository;
 import br.com.tmvolpato.mygames.repository.privilege.PrivilegeRepository;
 import br.com.tmvolpato.mygames.repository.role.RoleRepository;
 import br.com.tmvolpato.mygames.repository.user.UserRepository;
+import br.com.tmvolpato.mygames.service.security.UserApplication;
 import org.assertj.core.api.Assertions;
 import org.junit.Rule;
 import org.junit.Test;
@@ -99,6 +100,7 @@ public class GameRepositoryTest {
     @Test
     public void countShouldQuantityData() {
         final User owner = this.createUser();
+        final UserApplication userApplication = new UserApplication(owner);
 
         final Platform platform = createPlatform();
         final Company company = createCompany();
@@ -113,7 +115,7 @@ public class GameRepositoryTest {
         final Game gameThree = new Game("For Honor", new BigDecimal(79.00), platform, company, genre, owner);
         this.repository.save(gameThree);
 
-        Assertions.assertThat(this.repository.count(owner, null)).isEqualTo(3L);
+        Assertions.assertThat(this.repository.count(userApplication, null)).isEqualTo(3L);
     }
 
     @Test

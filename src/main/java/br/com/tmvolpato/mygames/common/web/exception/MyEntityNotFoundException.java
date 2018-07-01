@@ -3,6 +3,8 @@ package br.com.tmvolpato.mygames.common.web.exception;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import javax.persistence.PersistenceException;
+
 /**
  * Classe exceção para recurso não encontrado.
  *
@@ -11,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  * @version 1.0.0
  */
 @ResponseStatus(value = HttpStatus.NOT_FOUND)
-public final class MyEntityNotFoundException extends RuntimeException {
+public final class MyEntityNotFoundException extends PersistenceException {
 
     public MyEntityNotFoundException() {
         super();

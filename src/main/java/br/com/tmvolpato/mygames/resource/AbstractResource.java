@@ -9,8 +9,8 @@ import br.com.tmvolpato.mygames.common.web.event.PaginatedResultsRetrievedEvent;
 import br.com.tmvolpato.mygames.common.web.event.SingleResourceRetrievedEvent;
 import br.com.tmvolpato.mygames.common.web.exception.MyBadRequestException;
 import br.com.tmvolpato.mygames.common.web.exception.MyResourceNotFoundException;
-import br.com.tmvolpato.mygames.common.web.exception.MyUnauthorizedException;
 import br.com.tmvolpato.mygames.service.ServicePreconditions;
+import br.com.tmvolpato.mygames.service.security.UserApplication;
 import com.google.common.base.Preconditions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
@@ -54,6 +54,10 @@ public abstract class AbstractResource<T extends IEntity> {
         RestPreconditions.checkRequestElementNotNull(resource);
         RestPreconditions.checkRequestElementNotNull(resource.getId());
         RestPreconditions.checkNotNull(resource.getId().equals(id));
+    }
+
+    protected final void checkUserApplication(final UserApplication userApplication) {
+        RestPreconditions.checkNotNull(userApplication);
     }
 
     protected final void checkRequiredSingleResourceInternal(final T resource) {
@@ -110,7 +114,7 @@ public abstract class AbstractResource<T extends IEntity> {
         final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (authentication == null || authentication.getPrincipal() == null || authentication.getPrincipal().equals("") ) {
-            throw new MyUnauthorizedException();
+            //throw new MyUnauthorizedException();
 
         }
         return authentication.getPrincipal().toString();

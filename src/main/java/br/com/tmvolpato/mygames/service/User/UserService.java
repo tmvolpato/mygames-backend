@@ -2,18 +2,19 @@ package br.com.tmvolpato.mygames.service.User;
 
 import br.com.tmvolpato.mygames.model.User;
 import br.com.tmvolpato.mygames.service.IRawService;
+import br.com.tmvolpato.mygames.service.security.UserApplication;
 
 import java.util.Optional;
 
 /**
- * Interface serviço usuário.
+ * Interface user service.
  *
  * @author Thiago Michel Volpato
  * @since 2017
  * @version 1.0.0
  */
-public interface UserService extends IRawService<User, User> {
+public interface UserService extends IRawService<UserApplication, User> {
 
-    Optional<User> findById(User owner, Long id);
+    Optional<User> findById(UserApplication userApplication, Long id);
     Optional<User> findUsername(String email);
 }

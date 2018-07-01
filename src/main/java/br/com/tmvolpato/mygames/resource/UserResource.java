@@ -4,6 +4,7 @@ import br.com.tmvolpato.mygames.common.constant.ConstantNumeric;
 import br.com.tmvolpato.mygames.common.web.util.Mappings;
 import br.com.tmvolpato.mygames.model.User;
 import br.com.tmvolpato.mygames.service.User.UserService;
+import br.com.tmvolpato.mygames.service.security.UserApplication;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -13,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -46,41 +48,39 @@ public class UserResource extends AbstractResource<User>{
     @PreAuthorize("hasAnyAuthority('ADMIN', 'USER') and #oauth2.hasScope('write')")
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "Update a user")
-    public void update(@ApiParam(type = "path", name= "id", required = true)
+    public void update(final @AuthenticationPrincipal UserApplication userApplication,
+                       @ApiParam(type = "path", name= "id", required = true)
                        @PathVariable("id") final Long id,
                        @ApiParam(type = "body", name = "user", required = true)
                        @Valid @RequestBody User user) {
         this.checkRequiredUpdateInternal(id, user);
-        this.userService.update(this.getUserLogged(), user);
+        this.userService.update(userApplication, user);
     }
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAnyAuthority('ADMIN', 'USER') and #oauth2.hasScope('write')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @ApiOperation(value = "Delete the user")
-    public void delete(@ApiParam(type = "path", name = "id", required = true)
+    public void delete(final @AuthenticationPrincipal UserApplication userApplication,
+                       @ApiParam(type = "path", name = "id", required = true)
                        @PathVariable("id") final Long id) {
        this.checkRequiredPrimaryKeyDeleteInternal(id);
-       this.userService.delete(this.getUserLogged(), id);
+       this.userService.delete(userApplication, id);
     }
 
     @GetMapping(value = "/{id}")
     @PreAuthorize("hasAnyAuthority('ADMIN', 'USER') and #oauth2.hasScope('read')")
     @ApiOperation(value = "Find user by id")
-    public ResponseEntity<User> findByUserId(@ApiParam(type = "path", name = "id", required = true)
+    public ResponseEntity<User> findByUserId(final @AuthenticationPrincipal UserApplication userApplication,
+                                             @ApiParam(type = "path", name = "id", required = true)
                                              @PathVariable("id") final Long id, final UriComponentsBuilder uriBuilder,
                                              final HttpServletResponse response) {
 
-        final Optional<User> userFound = this.userService.findById(this.getUserLogged(), id);
+        final Optional<User> userFound = this.userService.findById(userApplication, id);
         this.checkRequiredSingleResourceInternal(userFound.get());
         this.singlePublishEvent(uriBuilder, response);
         return ResponseEntity.status(HttpStatus.OK)
                 .cacheControl(CacheControl.maxAge(ConstantNumeric.ONE_HUNDRED, TimeUnit.SECONDS))
                 .body(userFound.get());
     }
-
-    private User getUserLogged() {
-        return this.userService.findUsername(super.getPrincipal()).get();
-    }
-
 }

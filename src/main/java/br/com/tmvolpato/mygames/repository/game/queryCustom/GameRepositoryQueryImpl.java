@@ -4,6 +4,7 @@ import br.com.tmvolpato.mygames.model.*;
 import br.com.tmvolpato.mygames.repository.AbstractQuery;
 import br.com.tmvolpato.mygames.repository.game.filter.GameFilter;
 import br.com.tmvolpato.mygames.repository.game.specification.GameSpecification;
+import br.com.tmvolpato.mygames.service.security.UserApplication;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -19,7 +20,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Querie customizada para a entidade game.
+ * Implementation custom query of game.
  *
  * @author Thiago Michel Volpato
  * @version 1.0.0
@@ -31,7 +32,7 @@ public class GameRepositoryQueryImpl extends AbstractQuery implements GameReposi
     private EntityManager em;
 
     @Override
-    public Page<Game> findAllPaginatedAndFilter(final User user, final GameFilter gameFilter, final int page, final int size) {
+    public Page<Game> findAllPaginatedAndFilter(final UserApplication userApplication, final GameFilter gameFilter, final int page, final int size) {
         final CriteriaBuilder builder = this.em.getCriteriaBuilder();
         final CriteriaQuery<Game> criteria = builder.createQuery(Game.class);
         final Root<Game> root = criteria.from(Game.class);
@@ -43,23 +44,23 @@ public class GameRepositoryQueryImpl extends AbstractQuery implements GameReposi
                 .fetch(User_.roles, JoinType.LEFT)
                 .fetch(Role_.privileges, JoinType.LEFT);
 
-        final Predicate[] predicates = this.createPredicates(user, gameFilter, criteria, builder, root);
+        final Predicate[] predicates = this.createPredicates(userApplication, gameFilter, criteria, builder, root);
         criteria.where(predicates);
         criteria.orderBy(builder.asc(root.get(Game_.title)));
         criteria.select(root);
         final TypedQuery<Game> query = this.em.createQuery(criteria);
         final Pageable pageable = PageRequest.of(page, size);
         this.addRestrictionPagined(query, pageable);
-        return new PageImpl<>(query.getResultList(), pageable, this.count(user, gameFilter));
+        return new PageImpl<>(query.getResultList(), pageable, this.count(userApplication, gameFilter));
     }
 
     @Override
-    public long count(final User user, final GameFilter gameFilter) {
+    public long count(final UserApplication userApplication, final GameFilter gameFilter) {
         final CriteriaBuilder builder = this.em.getCriteriaBuilder();
         final CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
         final Root<Game> root = criteria.from(Game.class);
 
-        final Predicate[] predicates = this.createPredicates(user, gameFilter, criteria, builder, root);
+        final Predicate[] predicates = this.createPredicates(userApplication, gameFilter, criteria, builder, root);
         criteria.where(predicates);
         criteria.select(builder.count(root));
         return this.em.createQuery(criteria).getSingleResult().longValue();
@@ -69,20 +70,20 @@ public class GameRepositoryQueryImpl extends AbstractQuery implements GameReposi
     /**
      * Filtros de pesquisa.
      *
-     * @param userLogged
+     * @param userApplication
      * @param gameFilter
      * @param criteriaQuery
      * @param builder
      * @param root
      * @return
      */
-    private Predicate[] createPredicates(final User userLogged, final GameFilter gameFilter,
+    private Predicate[] createPredicates(final UserApplication userApplication, final GameFilter gameFilter,
                                          final CriteriaQuery<?> criteriaQuery,
                                          final CriteriaBuilder builder,
                                          final Root<Game> root) {
 
        final List<Predicate> predicates = new LinkedList<>();
-       final Predicate predicate = builder.equal(root.get(Game_.user).get(User_.id), userLogged.getId());
+       final Predicate predicate = builder.equal(root.get(Game_.user).get(User_.id), userApplication.getId());
 
         predicates.add(predicate);
 

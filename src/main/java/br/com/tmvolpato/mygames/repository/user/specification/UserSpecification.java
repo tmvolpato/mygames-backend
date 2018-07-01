@@ -9,7 +9,7 @@ import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.JoinType;
 
 /**
- * Query especifica do usuário.
+ * Specification query of user.
  *
  * @author Thiago Michel Volpato
  * @version 1.0.0
@@ -18,7 +18,7 @@ import javax.persistence.criteria.JoinType;
 public final class UserSpecification {
 
     /**
-     * Procura pelo ID.
+     * Find by id of user.
      *
      * @param id
      * @return
@@ -34,7 +34,7 @@ public final class UserSpecification {
     }
 
     /**
-     * Procura pelo email.
+     * Find by email of user.
      *
      * @param email
      * @return
