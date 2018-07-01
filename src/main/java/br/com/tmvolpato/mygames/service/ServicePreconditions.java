@@ -1,10 +1,6 @@
 package br.com.tmvolpato.mygames.service;
 
-import br.com.tmvolpato.mygames.common.web.exception.MyBadRequestException;
-import br.com.tmvolpato.mygames.common.web.exception.MyConflictException;
-import br.com.tmvolpato.mygames.common.web.exception.MyEntityNotFoundException;
-import br.com.tmvolpato.mygames.common.web.exception.MyResourceNotFoundException;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import br.com.tmvolpato.mygames.common.web.exception.*;
 import org.springframework.util.StringUtils;
 
 /**
@@ -41,7 +37,7 @@ public final class ServicePreconditions {
      */
     public static void checkEntityExists(final boolean entityExists) {
         if (!entityExists) {
-            throw new MyEntityNotFoundException();
+            throw new MyEntityNotFoundException("Entity not found");
         }
     }
 
@@ -68,6 +64,17 @@ public final class ServicePreconditions {
     }
 
     /**
+     * Verifica o usuário do applicação.
+     *
+     * @param object
+     */
+    public static void checkUserApplication(final Object object) {
+        if (object == null) {
+            throw new MyAccessDeniedException("User application is null");
+        }
+    }
+
+    /**
      * Verifica o argumento passado.
      *
      * @param okArgument
@@ -79,7 +86,7 @@ public final class ServicePreconditions {
     }
 
     /**
-     * Verifica se o valor passado é true é porque já existe.
+     * Verifica se o valor passado já existe.
      * @param value
      */
     public static void checkIfAlreadyExist(final boolean value) {

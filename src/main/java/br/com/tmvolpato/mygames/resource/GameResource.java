@@ -4,10 +4,10 @@ import br.com.tmvolpato.mygames.common.constant.ConstantNumeric;
 import br.com.tmvolpato.mygames.common.constant.ConstantQuery;
 import br.com.tmvolpato.mygames.common.web.util.Mappings;
 import br.com.tmvolpato.mygames.model.Game;
-import br.com.tmvolpato.mygames.model.User;
 import br.com.tmvolpato.mygames.repository.game.filter.GameFilter;
 import br.com.tmvolpato.mygames.service.User.UserService;
 import br.com.tmvolpato.mygames.service.game.GameService;
+import br.com.tmvolpato.mygames.service.security.UserApplication;
 import com.google.common.collect.Lists;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -19,6 +19,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -55,11 +56,12 @@ public class GameResource extends AbstractResource<Game> {
     @PreAuthorize("hasAnyAuthority('ADMIN', 'USER') and #oauth2.hasScope('write')")
     @ResponseStatus(HttpStatus.CREATED)
     @ApiOperation(value = "Add a new game")
-    public void create(@ApiParam(type = "body", name = "game", required = true)
+    public void create(final @AuthenticationPrincipal UserApplication userApplication,
+                       @ApiParam(type = "body", name = "game", required = true)
                        @Valid @RequestBody final Game game, final UriComponentsBuilder uriBuilder,
                        final HttpServletResponse response) {
         this.checkRequiredCreateInternal(game);
-        final Game gameSaved = this.gameService.create(this.getUserLogged(), game);
+        final Game gameSaved = this.gameService.create(userApplication, game);
         this.createPublishEvent(gameSaved, uriBuilder, response);
     }
 
@@ -67,32 +69,35 @@ public class GameResource extends AbstractResource<Game> {
     @PreAuthorize("hasAnyAuthority('ADMIN', 'USER') and #oauth2.hasScope('write')")
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "Update the game")
-    public void update(@ApiParam(type = "path", name = "id", required = true)
+    public void update(final @AuthenticationPrincipal UserApplication userApplication,
+                       @ApiParam(type = "path", name = "id", required = true)
                        @PathVariable("id") final Long id,
                        @ApiParam(type = "body", name = "game", required = true)
                        @Valid @RequestBody final Game game) {
         this.checkRequiredUpdateInternal(id, game);
-        this.gameService.update(this.getUserLogged(), game);
+        this.gameService.update(userApplication, game);
     }
 
     @DeleteMapping(value = "/{id}")
     @PreAuthorize("hasAnyAuthority('ADMIN', 'USER') and #oauth2.hasScope('write')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @ApiOperation(value = "Delete the game")
-    public void delete(@ApiParam(type = "path", name = "id", required = true)
+    public void delete(final @AuthenticationPrincipal UserApplication userApplication,
+                       @ApiParam(type = "path", name = "id", required = true)
                        @PathVariable("id") final Long id) {
         this.checkRequiredPrimaryKeyDeleteInternal(id);
-        this.gameService.delete(this.getUserLogged(), id);
+        this.gameService.delete(userApplication, id);
     }
 
     @GetMapping(value = "/{id}")
     @PreAuthorize("hasAnyAuthority('ADMIN', 'USER') and #oauth2.hasScope('read')")
     @ApiOperation(value = "Find of game by id")
-    public ResponseEntity<Game> findByGameId(@ApiParam(type = "path", name = "id", required = true)
+    public ResponseEntity<Game> findByGameId(final @AuthenticationPrincipal UserApplication userApplication,
+                                             @ApiParam(type = "path", name = "id", required = true)
                                              @PathVariable("id") final Long id, final UriComponentsBuilder uriBuilder,
                                              final HttpServletResponse response) {
 
-        final Optional<Game> gameFound = this.gameService.findById(this.getUserLogged(), id);
+        final Optional<Game> gameFound = this.gameService.findById(userApplication, id);
         this.checkRequiredSingleResourceInternal(gameFound.get());
         this.singlePublishEvent(uriBuilder, response);
         return ResponseEntity.status(HttpStatus.OK)
@@ -103,7 +108,8 @@ public class GameResource extends AbstractResource<Game> {
     @GetMapping(params = {ConstantQuery.PAGE, ConstantQuery.SIZE})
     @PreAuthorize("hasAnyAuthority('ADMIN', 'USER') and #oauth2.hasScope('read')")
     @ApiOperation(value = "List of games with filter and paginated")
-    public ResponseEntity<List<Game>> findAllPaginatedAndFilter(final GameFilter gameFilter,
+    public ResponseEntity<List<Game>> findAllPaginatedAndFilter(final @AuthenticationPrincipal UserApplication userApplication,
+                                                                final GameFilter gameFilter,
                                                                 @ApiParam(type = "query", name = ConstantQuery.PAGE, required = true)
                                                                 @RequestParam(value = ConstantQuery.PAGE) final int page,
                                                                 @ApiParam(type = "query", name = "size", required = true)
@@ -111,16 +117,11 @@ public class GameResource extends AbstractResource<Game> {
                                                                 final UriComponentsBuilder uriBuilder,
                                                                 final HttpServletResponse response) {
 
-        final Page<Game> resultPages = this.gameService.findAllPaginatedAndFilter(this.getUserLogged(), gameFilter, page, size);
+        final Page<Game> resultPages = this.gameService.findAllPaginatedAndFilter(userApplication, gameFilter, page, size);
         this.checkRequiredPaginatedResourceInternal(page, resultPages);
         this.paginatedPublishEvent(page, size, resultPages.getTotalPages(), uriBuilder, response);
         return ResponseEntity.status(HttpStatus.OK)
                 .cacheControl(CacheControl.maxAge(ConstantNumeric.ONE_HUNDRED, TimeUnit.SECONDS))
                 .body(Lists.newArrayList(resultPages.getContent()));
     }
-
-    private User getUserLogged() {
-        return this.userService.findUsername(super.getPrincipal()).get();
-    }
-
 }

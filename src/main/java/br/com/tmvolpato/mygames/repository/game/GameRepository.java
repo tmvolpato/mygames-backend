@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 /**
- * Repositório do game.
+ * Interface repository of game.
  *
  * @author Thiago Michel Volpato
  * @sice 2017

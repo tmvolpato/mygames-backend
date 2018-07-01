@@ -6,7 +6,7 @@ import org.springframework.data.domain.Sort;
 import javax.persistence.TypedQuery;
 
 /**
- * Classe abstrata query.
+ * Abstract query.
  *
  * @author Thiago Michel Volpato
  * @sice 2017

@@ -3,6 +3,7 @@ package br.com.tmvolpato.mygames.model;
 import br.com.tmvolpato.mygames.common.constant.*;
 import br.com.tmvolpato.mygames.common.util.GeneratorPassword;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonAppend;
 import io.swagger.annotations.ApiModelProperty;
 import jdk.nashorn.internal.ir.annotations.Ignore;
@@ -16,6 +17,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.util.HashSet;
 import java.util.Set;
+
+import static com.fasterxml.jackson.annotation.JsonProperty.Access.*;
 
 /**
  * User class.
@@ -52,7 +55,7 @@ public class User extends AbstractPersistable {
     @ApiModelProperty(notes = "E-mail of user", required = true)
     private String email;
 
-    //@JsonIgnore
+    @JsonProperty(access = WRITE_ONLY)
     @Getter
     @Setter
     @NotBlank(message = ConstraintMessageValidation.PASSWORD_NOT_BLANK)

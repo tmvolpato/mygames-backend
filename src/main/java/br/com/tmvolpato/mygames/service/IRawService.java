@@ -3,7 +3,7 @@ package br.com.tmvolpato.mygames.service;
 import br.com.tmvolpato.mygames.common.interfaces.IEntity;
 
 /**
- * Interface serviço crud.
+ * Interface service generic.
  *
  * @author Thiago Michel Volpato
  * @since 2017
@@ -11,9 +11,9 @@ import br.com.tmvolpato.mygames.common.interfaces.IEntity;
  */
 public interface IRawService<E, T extends IEntity>{
 
-    T create(E owner, T entity);
+    T create(E userApplication, T entity);
 
-    T update(E owner, T entity);
+    T update(E userApplication, T entity);
 
-    void delete(E owner, Long primaryKey);
+    void delete(E userApplication, Long primaryKey);
 }

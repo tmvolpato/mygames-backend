@@ -4,6 +4,7 @@ import br.com.tmvolpato.mygames.model.Game;
 import br.com.tmvolpato.mygames.model.User;
 import br.com.tmvolpato.mygames.repository.game.filter.GameFilter;
 import br.com.tmvolpato.mygames.service.IRawService;
+import br.com.tmvolpato.mygames.service.security.UserApplication;
 import org.springframework.data.domain.Page;
 
 import java.util.Optional;
@@ -15,8 +16,8 @@ import java.util.Optional;
  * @since 2017
  * @version 1.0.0
  */
-public interface GameService extends IRawService<User, Game> {
+public interface GameService extends IRawService<UserApplication, Game> {
 
-    Optional<Game> findById(User user, Long id);
-    Page<Game> findAllPaginatedAndFilter(User userLogged, GameFilter gameFilter, int page, int size);
+    Optional<Game> findById(UserApplication userApplication, Long id);
+    Page<Game> findAllPaginatedAndFilter(UserApplication userApplication, GameFilter gameFilter, int page, int size);
 }

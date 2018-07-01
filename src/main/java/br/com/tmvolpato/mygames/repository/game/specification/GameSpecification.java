@@ -2,6 +2,7 @@ package br.com.tmvolpato.mygames.repository.game.specification;
 
 import br.com.tmvolpato.mygames.common.constant.ConstantQuery;
 import br.com.tmvolpato.mygames.model.*;
+import br.com.tmvolpato.mygames.service.security.UserApplication;
 import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.criteria.Expression;
@@ -9,7 +10,7 @@ import javax.persistence.criteria.Join;
 import javax.persistence.criteria.JoinType;
 
 /**
- * Query especifica do game.
+ * Specific query for game.
  *
  * @author Thiago Michel Volpato
  * @version 1.0.0
@@ -18,12 +19,12 @@ import javax.persistence.criteria.JoinType;
 public final class GameSpecification {
 
     /**
-     * Procura pelo ID.
+     * Find by id of game.
      *
      * @param id
      * @return
      */
-    public static Specification<Game> findById(final User owner, final Long id) {
+    public static Specification<Game> findById(final UserApplication userApplication, final Long id) {
         return ((root, criteriaQuery, criteriaBuilder) -> {
 
             root.fetch(Game_.company, JoinType.LEFT);
@@ -34,13 +35,13 @@ public final class GameSpecification {
                     .fetch(Role_.privileges, JoinType.LEFT);
             final Expression<User> user = root.get(Game_.user);
             final Expression<Long> gameId = root.get(Game_.id);
-            return criteriaBuilder.and(criteriaBuilder.equal(user, owner),
+            return criteriaBuilder.and(criteriaBuilder.equal(user, userApplication.getUser()),
                                 criteriaBuilder.equal(gameId, id));
         });
     }
 
     /**
-     * Procura pelo título.
+     * Find by title of game.
      *
      * @param title
      * @return
@@ -53,7 +54,7 @@ public final class GameSpecification {
     }
 
     /**
-     * Procura pela plataforma.
+     * Find by platform of game.
      *
      * @param platform
      * @return
@@ -66,7 +67,7 @@ public final class GameSpecification {
     }
 
     /**
-     * Procura pela empresa.
+     * Find by company of game.
      *
      * @param company
      * @return
@@ -79,7 +80,7 @@ public final class GameSpecification {
     }
 
     /**
-     * Procura pelo gênero.
+     * Find by genre of game.
      *
      * @param genre
      * @return

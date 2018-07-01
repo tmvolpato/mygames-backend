@@ -1,9 +1,7 @@
 package br.com.tmvolpato.mygames.common.web.exceptionhandler;
 
 import br.com.tmvolpato.mygames.common.constant.ConstantNumeric;
-import br.com.tmvolpato.mygames.common.web.exception.MyConflictException;
-import br.com.tmvolpato.mygames.common.web.exception.MyEntityNotFoundException;
-import br.com.tmvolpato.mygames.common.web.exception.MyResourceNotFoundException;
+import br.com.tmvolpato.mygames.common.web.exception.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -108,7 +106,7 @@ public class MyGamesExceptionHandler extends ResponseEntityExceptionHandler {
      * @return
      */
     @Override
-    protected final ResponseEntity<Object> handleMethodArgumentNotValid(final MethodArgumentNotValidException ex,
+    public final ResponseEntity<Object> handleMethodArgumentNotValid(final MethodArgumentNotValidException ex,
                                                                         final HttpHeaders headers,
                                                                         final HttpStatus status,
                                                                         final WebRequest request) {
@@ -125,8 +123,8 @@ public class MyGamesExceptionHandler extends ResponseEntityExceptionHandler {
      * @param ex
      * @return
      */
-    @ExceptionHandler(ConstraintViolationException.class)
-    protected final ResponseEntity<Object> handleConstraintViolation(final ConstraintViolationException ex) {
+    @ExceptionHandler(value = { ConstraintViolationException.class, MyBadRequestException.class })
+    public final ResponseEntity<Object> handleConstraintViolation(final ConstraintViolationException ex) {
         final MessageApiError messageApiError = new MessageApiError(HttpStatus.BAD_REQUEST);
         messageApiError.setMessage("Validation Error");
         messageApiError.addValidationErrors(ex.getConstraintViolations());
@@ -140,10 +138,11 @@ public class MyGamesExceptionHandler extends ResponseEntityExceptionHandler {
      * @return
      */
     @ExceptionHandler(value = { EntityNotFoundException.class, MyEntityNotFoundException.class, MyResourceNotFoundException.class })
-    protected final ResponseEntity<Object> handleEntityNotFound(final EntityNotFoundException ex) {
-       final MessageApiError messageApiError = new MessageApiError(HttpStatus.NOT_FOUND);
-       messageApiError.setMessage(ex.getMessage());
-       return this.buildResponseEntity(messageApiError);
+    public ResponseEntity<Object> handleEntityNotFound(final RuntimeException ex) {
+        return this.buildResponseEntity(new MessageApiError(HttpStatus.NOT_FOUND, ex));
+       //final MessageApiError messageApiError = new MessageApiError(HttpStatus.NOT_FOUND);
+       //messageApiError.setMessage(ex.getMessage());
+       //return this.buildResponseEntity(messageApiError);
     }
 
     /**
@@ -171,8 +170,8 @@ public class MyGamesExceptionHandler extends ResponseEntityExceptionHandler {
      * @param request
      * @return
      */
-    @ExceptionHandler(value = { DataIntegrityViolationException.class })
-    protected final ResponseEntity<Object> handleDataIntegrityViolation(final DataIntegrityViolationException ex, final WebRequest request) {
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public final ResponseEntity<Object> handleDataIntegrityViolation(final DataIntegrityViolationException ex, final WebRequest request) {
       if (ex.getCause() instanceof ConstraintViolationException) {
           return this.buildResponseEntity(new MessageApiError(HttpStatus.CONFLICT, "Database error", ex.getCause()));
       }
@@ -187,7 +186,7 @@ public class MyGamesExceptionHandler extends ResponseEntityExceptionHandler {
      * @return
      */
     @ExceptionHandler(AuthenticationCredentialsNotFoundException.class)
-    protected final ResponseEntity<Object> handleAuthenticationCredentialsNotFound(final AuthenticationException ex, final WebRequest request) {
+    public final ResponseEntity<Object> handleAuthenticationCredentialsNotFound(final AuthenticationException ex, final WebRequest request) {
         final String error = "Authentication is required.";
         return this.buildResponseEntity(new MessageApiError(HttpStatus.FORBIDDEN, error, ex));
     }
@@ -200,7 +199,7 @@ public class MyGamesExceptionHandler extends ResponseEntityExceptionHandler {
      * @return
      */
     @ExceptionHandler(value = { IllegalArgumentException.class, IllegalStateException.class, MyConflictException.class})
-    protected final ResponseEntity<Object> handleConflict(final RuntimeException ex, final WebRequest request) {
+    public final ResponseEntity<Object> handleConflict(final RuntimeException ex, final WebRequest request) {
         final String error = "This should be application specific";
         return this.buildResponseEntity(new MessageApiError(HttpStatus.CONFLICT, error, ex));
     }
@@ -212,8 +211,8 @@ public class MyGamesExceptionHandler extends ResponseEntityExceptionHandler {
      * @param request
      * @return
      */
-    @ExceptionHandler(AccessDeniedException.class)
-    protected final ResponseEntity<Object> handleAccessDenied(final Exception ex, final WebRequest request) {
+    @ExceptionHandler({AccessDeniedException.class, MyAccessDeniedException.class})
+    public final ResponseEntity<Object> handleAccessDenied(final Exception ex, final WebRequest request) {
         final String error = "Access denied";
         return this.buildResponseEntity(new MessageApiError(HttpStatus.FORBIDDEN, error, ex));
     }
