@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
- * Email already exist.
+ * Email already exist exception.
  *
  * @author Thiago Michel Volpato
  * @since 2018
