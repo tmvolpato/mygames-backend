@@ -170,11 +170,19 @@ public class MyGamesExceptionHandler extends ResponseEntityExceptionHandler {
      * @param request
      * @return
      */
-    @ExceptionHandler(DataIntegrityViolationException.class)
+    @ExceptionHandler(value = { DataIntegrityViolationException.class, MyEmailExistException.class })
     public final ResponseEntity<Object> handleDataIntegrityViolation(final DataIntegrityViolationException ex, final WebRequest request) {
       if (ex.getCause() instanceof ConstraintViolationException) {
+          this.logger.error("Data Integrity Violation", ex.getCause());
           return this.buildResponseEntity(new MessageApiError(HttpStatus.CONFLICT, "Database error", ex.getCause()));
       }
+
+      if (ex.getCause() != null && ex.getCause() instanceof org.hibernate.exception.ConstraintViolationException) {
+          this.logger.error("Data Integrity Violation", ex);
+          return this.buildResponseEntity(new MessageApiError(HttpStatus.CONFLICT, "Database error", ex));
+      }
+
+        this.logger.error("Data Integrity", ex);
           return this.buildResponseEntity(new MessageApiError(HttpStatus.INTERNAL_SERVER_ERROR, ex));
     }
 
