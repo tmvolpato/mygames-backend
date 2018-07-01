@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
         ServicePreconditions.checkEntityExists(user);
         final Role roleUser = this.roleRepository.findByName("USER");
         final Optional<User> userExist = this.userRepository.findOne(Specification.where(UserSpecification.findByEmail(user.getEmail())));
-        ServicePreconditions.checkIfAlreadyExist(userExist.isPresent());
+        ServicePreconditions.checkEmailExist(userExist.isPresent());
         final User newUser = new User(user.getName(), user.getEmail(), user.getPassword(), Sets.newHashSet(roleUser));
         this.checkRole(newUser);
         return this.userRepository.save(newUser);

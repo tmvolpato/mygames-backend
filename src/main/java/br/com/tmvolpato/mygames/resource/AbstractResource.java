@@ -15,8 +15,6 @@ import com.google.common.base.Preconditions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
@@ -108,15 +106,5 @@ public abstract class AbstractResource<T extends IEntity> {
 
     protected void paginatedPublishEvent(final int page, final int pageSize, final int totalPages, final UriComponentsBuilder uriBuilder, final HttpServletResponse response) {
         this.eventPublisher.publishEvent(new PaginatedResultsRetrievedEvent<>(this.clazz, uriBuilder, response, page, totalPages, pageSize));
-    }
-
-    protected String getPrincipal() {
-        final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        if (authentication == null || authentication.getPrincipal() == null || authentication.getPrincipal().equals("") ) {
-            //throw new MyUnauthorizedException();
-
-        }
-        return authentication.getPrincipal().toString();
     }
 }
