@@ -22,6 +22,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -42,21 +43,19 @@ import java.util.concurrent.TimeUnit;
 public class GameResource extends AbstractResource<Game> {
 
     private final GameService gameService;
-    private final UserService userService;
 
     @Autowired
-    public GameResource(final GameService gameService, final UserService userService) {
+    public GameResource(final GameService gameService) {
         super(Game.class);
 
         this.gameService = gameService;
-        this.userService = userService;
     }
 
     @PostMapping
     @PreAuthorize("hasAnyAuthority('ADMIN', 'USER') and #oauth2.hasScope('write')")
     @ResponseStatus(HttpStatus.CREATED)
     @ApiOperation(value = "Add a new game")
-    public void create(final @AuthenticationPrincipal UserApplication userApplication,
+    public void create(@ApiIgnore @AuthenticationPrincipal final UserApplication userApplication,
                        @ApiParam(type = "body", name = "game", required = true)
                        @Valid @RequestBody final Game game, final UriComponentsBuilder uriBuilder,
                        final HttpServletResponse response) {
@@ -69,7 +68,7 @@ public class GameResource extends AbstractResource<Game> {
     @PreAuthorize("hasAnyAuthority('ADMIN', 'USER') and #oauth2.hasScope('write')")
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "Update the game")
-    public void update(final @AuthenticationPrincipal UserApplication userApplication,
+    public void update(@ApiIgnore @AuthenticationPrincipal final UserApplication userApplication,
                        @ApiParam(type = "path", name = "id", required = true)
                        @PathVariable("id") final Long id,
                        @ApiParam(type = "body", name = "game", required = true)
@@ -82,7 +81,7 @@ public class GameResource extends AbstractResource<Game> {
     @PreAuthorize("hasAnyAuthority('ADMIN', 'USER') and #oauth2.hasScope('write')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @ApiOperation(value = "Delete the game")
-    public void delete(final @AuthenticationPrincipal UserApplication userApplication,
+    public void delete(@ApiIgnore @AuthenticationPrincipal final UserApplication userApplication,
                        @ApiParam(type = "path", name = "id", required = true)
                        @PathVariable("id") final Long id) {
         this.checkRequiredPrimaryKeyDeleteInternal(id);
@@ -92,7 +91,7 @@ public class GameResource extends AbstractResource<Game> {
     @GetMapping(value = "/{id}")
     @PreAuthorize("hasAnyAuthority('ADMIN', 'USER') and #oauth2.hasScope('read')")
     @ApiOperation(value = "Find of game by id")
-    public ResponseEntity<Game> findByGameId(final @AuthenticationPrincipal UserApplication userApplication,
+    public ResponseEntity<Game> findByGameId(@ApiIgnore @AuthenticationPrincipal final UserApplication userApplication,
                                              @ApiParam(type = "path", name = "id", required = true)
                                              @PathVariable("id") final Long id, final UriComponentsBuilder uriBuilder,
                                              final HttpServletResponse response) {
@@ -105,10 +104,10 @@ public class GameResource extends AbstractResource<Game> {
                 .body(gameFound.get());
     }
 
-    @GetMapping(params = {ConstantQuery.PAGE, ConstantQuery.SIZE})
+    @GetMapping(params = { ConstantQuery.PAGE, ConstantQuery.SIZE })
     @PreAuthorize("hasAnyAuthority('ADMIN', 'USER') and #oauth2.hasScope('read')")
     @ApiOperation(value = "List of games with filter and paginated")
-    public ResponseEntity<List<Game>> findAllPaginatedAndFilter(final @AuthenticationPrincipal UserApplication userApplication,
+    public ResponseEntity<List<Game>> findAllPaginatedAndFilter(@ApiIgnore @AuthenticationPrincipal final UserApplication userApplication,
                                                                 final GameFilter gameFilter,
                                                                 @ApiParam(type = "query", name = ConstantQuery.PAGE, required = true)
                                                                 @RequestParam(value = ConstantQuery.PAGE) final int page,

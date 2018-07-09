@@ -3,6 +3,7 @@ package br.com.tmvolpato.mygames.model;
 import br.com.tmvolpato.mygames.common.constant.ConstantColumn;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -26,16 +27,19 @@ public abstract class AbstractPersistable implements Persistable, Serializable {
     @Setter
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = ConstantColumn.ID, nullable = false, updatable = false)
+    @ApiModelProperty(hidden = true)
     private Long id;
 
     @JsonIgnore
     @Getter
     @Column(name = ConstantColumn.DATE_TIME_INCLUSION, nullable = false, updatable = false)
+    @ApiModelProperty(hidden = true)
     private LocalDateTime inclusion;
 
     @JsonIgnore
     @Getter
     @Column(name = ConstantColumn.DATE_TIME_LAST_EDITION)
+    @ApiModelProperty(hidden = true)
     private LocalDateTime lastEdition;
 
     @PrePersist

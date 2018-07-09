@@ -17,6 +17,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -48,7 +49,7 @@ public class UserResource extends AbstractResource<User>{
     @PreAuthorize("hasAnyAuthority('ADMIN', 'USER') and #oauth2.hasScope('write')")
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "Update a user")
-    public void update(final @AuthenticationPrincipal UserApplication userApplication,
+    public void update(@ApiIgnore @AuthenticationPrincipal final UserApplication userApplication,
                        @ApiParam(type = "path", name= "id", required = true)
                        @PathVariable("id") final Long id,
                        @ApiParam(type = "body", name = "user", required = true)
@@ -61,7 +62,7 @@ public class UserResource extends AbstractResource<User>{
     @PreAuthorize("hasAnyAuthority('ADMIN', 'USER') and #oauth2.hasScope('write')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @ApiOperation(value = "Delete the user")
-    public void delete(final @AuthenticationPrincipal UserApplication userApplication,
+    public void delete(@ApiIgnore @AuthenticationPrincipal final UserApplication userApplication,
                        @ApiParam(type = "path", name = "id", required = true)
                        @PathVariable("id") final Long id) {
        this.checkRequiredPrimaryKeyDeleteInternal(id);
@@ -71,7 +72,7 @@ public class UserResource extends AbstractResource<User>{
     @GetMapping(value = "/{id}")
     @PreAuthorize("hasAnyAuthority('ADMIN', 'USER') and #oauth2.hasScope('read')")
     @ApiOperation(value = "Find user by id")
-    public ResponseEntity<User> findByUserId(final @AuthenticationPrincipal UserApplication userApplication,
+    public ResponseEntity<User> findByUserId(@ApiIgnore @AuthenticationPrincipal final UserApplication userApplication,
                                              @ApiParam(type = "path", name = "id", required = true)
                                              @PathVariable("id") final Long id, final UriComponentsBuilder uriBuilder,
                                              final HttpServletResponse response) {
