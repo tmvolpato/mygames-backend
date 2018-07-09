@@ -1,7 +1,6 @@
 package br.com.tmvolpato.mygames.service;
 
 import br.com.tmvolpato.mygames.common.web.exception.*;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.util.StringUtils;
 
 /**
@@ -45,10 +44,10 @@ public final class ServicePreconditions {
     /**
      * E-mail already exist.
      *
-     * @param emailExist
+     * @param exist
      */
-    public static void checkEmailExist(final boolean emailExist) {
-        if (!emailExist) {
+    public static void checkEmailExist(final boolean exist) {
+        if (exist) {
             throw new MyEmailExistException("This e-mail already exist");
         }
     }

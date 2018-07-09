@@ -78,12 +78,11 @@ public class GameRepositoryQueryImpl extends AbstractQuery implements GameReposi
      * @return
      */
     private Predicate[] createPredicates(final UserApplication userApplication, final GameFilter gameFilter,
-                                         final CriteriaQuery<?> criteriaQuery,
-                                         final CriteriaBuilder builder,
+                                         final CriteriaQuery<?> criteriaQuery, final CriteriaBuilder builder,
                                          final Root<Game> root) {
 
-       final List<Predicate> predicates = new LinkedList<>();
-       final Predicate predicate = builder.equal(root.get(Game_.user).get(User_.id), userApplication.getId());
+        final List<Predicate> predicates = new LinkedList<>();
+        final Predicate predicate = builder.equal(root.get(Game_.user).get(User_.id), userApplication.getId());
 
         predicates.add(predicate);
 
@@ -110,7 +109,7 @@ public class GameRepositoryQueryImpl extends AbstractQuery implements GameReposi
             }
         }
 
-        return predicates.toArray(new Predicate[ predicates.size() ]);
+        return predicates.toArray(new Predicate[predicates.size()]);
 
     }
 

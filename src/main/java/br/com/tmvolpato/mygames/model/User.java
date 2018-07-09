@@ -4,9 +4,7 @@ import br.com.tmvolpato.mygames.common.constant.*;
 import br.com.tmvolpato.mygames.common.util.GeneratorPassword;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonAppend;
 import io.swagger.annotations.ApiModelProperty;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,7 +16,7 @@ import javax.validation.constraints.NotBlank;
 import java.util.HashSet;
 import java.util.Set;
 
-import static com.fasterxml.jackson.annotation.JsonProperty.Access.*;
+import static com.fasterxml.jackson.annotation.JsonProperty.Access.WRITE_ONLY;
 
 /**
  * User class.
@@ -67,7 +65,7 @@ public class User extends AbstractPersistable {
     @Getter
     @Setter
     @Column(name = ConstantColumn.ENABLED)
-    @ApiModelProperty(notes = "User active yes or no", hidden = true)
+    @ApiModelProperty(hidden = true)
     private boolean enabled;
 
     @JsonIgnore
@@ -77,12 +75,14 @@ public class User extends AbstractPersistable {
     @JoinTable(name = ConstantTable.USER_HAS_ROLE,
             joinColumns = @JoinColumn(name = ConstantColumn.USER_ID, referencedColumnName = ConstantColumn.ID),
             inverseJoinColumns = @JoinColumn(name = ConstantColumn.ROLE_ID, referencedColumnName = ConstantColumn.ID))
-    private Set<Role> roles;
+    @ApiModelProperty(hidden = true, readOnly = true)
+    private Set<Role> roles = new HashSet<>();
 
     @Getter
     @Setter
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY, orphanRemoval = true)
-    private Set<Game> games;
+    @ApiModelProperty(hidden = true, readOnly = true)
+    private Set<Game> games = new HashSet<>();
 
     public User() {}
 
