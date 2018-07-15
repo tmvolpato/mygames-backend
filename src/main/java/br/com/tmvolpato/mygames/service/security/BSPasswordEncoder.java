@@ -5,11 +5,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import static java.util.stream.Collectors.joining;
 
 /**
- * Codificação da senha, usado somente para desenvolvimento.
+ * Codification password.
  *
  * @author Thiago Michel Volpato
+ * @since 2018
  * @version 1.0.0
- * @sice 2018
  */
 public class BSPasswordEncoder implements PasswordEncoder {
 

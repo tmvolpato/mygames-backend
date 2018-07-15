@@ -8,9 +8,9 @@ import org.springframework.web.util.UriComponentsBuilder;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Evento disparado para paginação.
+ * Trigger the event of paginated.
+ * All information of url results of paginated.
  *
- * Contém todas as informações necessárias da URL de resultados da paginação
  *
  * @author Thiago Michel Volpato
  * @since 2017

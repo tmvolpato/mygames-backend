@@ -18,8 +18,8 @@ import javax.validation.Valid;
  * Account resource.
  *
  * @author Thiago Michel Volpato
- * @version 1.0.0
  * @since 2017
+ * @version 1.0.0
  */
 @RestController
 @RequestMapping(value = Mappings.CREATE_ACCOUNT)

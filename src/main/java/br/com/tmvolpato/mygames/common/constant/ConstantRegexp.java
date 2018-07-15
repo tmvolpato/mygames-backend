@@ -1,7 +1,7 @@
 package br.com.tmvolpato.mygames.common.constant;
 
 /**
- * Expressões regulares.
+ * Constant regular expressions.
  *
  * @author Thiago Michel Volpato
  * @since 2017
@@ -10,12 +10,12 @@ package br.com.tmvolpato.mygames.common.constant;
 public final class ConstantRegexp {
 
     /**
-     * Válida e-mail.
+     * Email validate.
      */
     public static final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
     /**
-     * Alfabeto e números.
+     * Alphabet or numeric.
      */
     public static final String ALFABETIC_AND_NUMERIC_PATTERN = "^[a-z][a-zA-Z0-9]*$";
 

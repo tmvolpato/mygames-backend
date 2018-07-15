@@ -11,11 +11,12 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
 /**
- * Cors filter configuration.
+ * Configuration cors filter.
  *
  * @author Thiago Michel Volpato
+ * @since 2017
  * @version 1.0.0
- * @sice 2017
+
  */
 @Profile("dev")
 @Configuration
@@ -61,7 +62,7 @@ public class CorsConfig {
     }
 
     /**
-     * Informações passadas no cabeçalho (Header).
+     * Define information.
      */
     static class ConstantCorsHeader {
 

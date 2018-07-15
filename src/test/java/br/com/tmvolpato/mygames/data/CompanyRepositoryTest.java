@@ -18,8 +18,8 @@ import javax.validation.ConstraintViolationException;
  * Unit test of CompanyRepository.
  *
  * @author Thiago Michel Volpato
+ * @since 2018
  * @version 1.0.0
- * @sice 2018
  */
 @RunWith(SpringRunner.class)
 @DataJpaTest

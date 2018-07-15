@@ -3,7 +3,7 @@ package br.com.tmvolpato.mygames.common.web.util;
 import br.com.tmvolpato.mygames.common.constant.ConstantNumeric;
 
 /**
- * Classe de links.
+ * Build link(s) and add in header.
  *
  * @author Thiago Michel Volpato
  * @since 2017

@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import static br.com.tmvolpato.mygames.common.web.util.LinkUtil.*;
 
 /**
- * Classe listener que observa o evento de paginação e adiciona informações no cabeçalho.
+ * Listening the event of paginated and add information in header.
  *
  * @author Thiago Michel Volpato
  * @since 2017

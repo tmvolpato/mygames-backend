@@ -1,7 +1,7 @@
 package br.com.tmvolpato.mygames.common.constant;
 
 /**
- * Tabelas do sistema.
+ * Constant tables of application.
  * 
  * @author Thiago Michel Volpato
  * @since 2017

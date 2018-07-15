@@ -4,7 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
- * Classe de exceção para recurso inexistente.
+ * Exception bad request.
  *
  * @author Thiago Michel Volpato
  * @since 2017

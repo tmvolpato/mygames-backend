@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
  * Repository of class Platform.
  *
  * @author Thiago Michel Volpato
- * @sice 2018
+ * @since 2018
  * @version 1.0.0
  */
 @Repository

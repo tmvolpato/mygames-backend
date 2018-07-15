@@ -14,7 +14,7 @@ import java.util.Map;
  * Enhance information in token.
  *
  * @author Thiago Michel Volpato
- * @sice 2017
+ * @since 2017
  * @version 1.0.0
  */
 @Component

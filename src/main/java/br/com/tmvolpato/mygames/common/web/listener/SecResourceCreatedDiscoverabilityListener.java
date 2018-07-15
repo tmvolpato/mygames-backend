@@ -4,7 +4,7 @@ import br.com.tmvolpato.mygames.common.constant.ConstantWeb;
 import org.springframework.stereotype.Component;
 
 /**
- * Classe listener de criação de um novo recurso.
+ * Listening the event for created of a new resource.
  *
  * @author Thiago Michel Volpato
  * @since 2017

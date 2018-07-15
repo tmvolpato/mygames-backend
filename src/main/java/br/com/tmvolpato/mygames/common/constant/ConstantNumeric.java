@@ -1,7 +1,7 @@
 package br.com.tmvolpato.mygames.common.constant;
 
 /**
- * Constante de números.
+ * Constant numeric.
  * 
  * @author Thiago Michel Volpato
  * @since 2017

@@ -12,11 +12,11 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 /**
- * Classe customizada para detalhe do usuário logado.
+ * User details service.
  *
  * @author Thiago Michel Volpato
+ * @since 2017
  * @version 1.0.0
- * @sice 2017
  */
 @Primary
 @Service
@@ -35,7 +35,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         if (userFound.isPresent()) {
             return new UserApplication(userFound.get());
         } else {
-            throw new UsernameNotFoundException("usuario não autorizado");
+            throw new UsernameNotFoundException("User not authorized");
         }
     }
 }

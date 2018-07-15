@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
  * doesn't fail with hibernate lazy-loading.
  *
  * @author Thiago Michel Volpato
- * @version 1.0.0
  * @sice 2018
+ * @version 1.0.0
  */
 @Component
 public class HibernateAwareObjectMapper extends ObjectMapper {

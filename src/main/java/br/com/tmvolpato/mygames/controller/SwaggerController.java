@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * Access documentation api.
+ * Controller of documentation of application.
  *
  * @author Thiago Michel Volpato
- * @version 1.0.0
  * @since 2018
+ * @version 1.0.0
  */
 
 @Controller

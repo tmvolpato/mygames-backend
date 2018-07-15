@@ -27,7 +27,7 @@ import javax.persistence.EntityNotFoundException;
 import javax.validation.ConstraintViolationException;
 
 /**
- * A class which displays the error of application.
+ * Exception handler of application.
  *
  * @author Thiago Michel Volpato
  * @version 1.0.0

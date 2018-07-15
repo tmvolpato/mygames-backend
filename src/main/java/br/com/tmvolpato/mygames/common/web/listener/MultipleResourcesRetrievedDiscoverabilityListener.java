@@ -14,7 +14,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Classe listener que observa o evento de multiplos recursos e adiciona informações no cabeçalho.
+ * Listening the event of multiples resources and add information in header.
  *
  * @author Thiago Michel Volpato
  * @since 2017

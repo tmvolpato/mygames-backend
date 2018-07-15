@@ -23,11 +23,11 @@ import java.util.Map;
 
 
 /**
- * Security configuration.
+ * Configuration security of application.
  *
  * @author Thiago Michel Volpato
+ * @since 2017
  * @version 1.0.0
- * @sice 2017
  */
 @Configuration
 @EnableWebSecurity

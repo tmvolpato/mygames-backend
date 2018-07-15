@@ -9,13 +9,13 @@ import org.springframework.web.util.UriComponentsBuilder;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Evento disparado quando o recurso é criado.
+ * Trigger the evento when a new resource is create.
  *
- * Cria a url que direciona para o novo recurso criado.
+ * Create a new url and direction for new resource created.
  *
  * @author Thiago Michel Volpato
+ * @since 2017
  * @version 1.0.0
- * @sice 2017
  */
 public final class AfterResourceCreateEvent<T extends IEntity> extends ApplicationEvent {
 
@@ -29,7 +29,8 @@ public final class AfterResourceCreateEvent<T extends IEntity> extends Applicati
     private final transient HttpServletResponse response;
 
     public AfterResourceCreateEvent(final Class<T> clazz, final String primaryKeyOfNewResource,
-                                    final UriComponentsBuilder uriBuilder, final HttpServletResponse response) {
+                                    final UriComponentsBuilder uriBuilder,
+                                    final HttpServletResponse response) {
         super(clazz);
 
         Preconditions.checkNotNull(primaryKeyOfNewResource);

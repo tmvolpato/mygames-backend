@@ -9,13 +9,13 @@ import javax.persistence.TypedQuery;
  * Abstract query.
  *
  * @author Thiago Michel Volpato
- * @sice 2017
+ * @since 2017
  * @version 1.0.0
  */
 public abstract class AbstractQuery {
 
     /**
-     * Seta valores de dados da paginação.
+     * Set values in paginated.
      *
      * @param query
      * @param pageable
@@ -30,11 +30,11 @@ public abstract class AbstractQuery {
     }
 
     /**
-     * Constroi o sorte.
+     * Build sort.
      *
      * @param sortBy
      * @param sortOrder
-     * @return
+     * @return sort
      */
     protected final Sort constructSort(final String sortBy, final String sortOrder) {
        Sort sortInfo = null;

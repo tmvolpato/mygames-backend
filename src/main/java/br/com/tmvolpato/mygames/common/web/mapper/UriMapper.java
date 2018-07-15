@@ -5,7 +5,7 @@ import br.com.tmvolpato.mygames.common.interfaces.IWithLongId;
 import org.springframework.stereotype.Component;
 
 /**
- * Classe que mapeia a URI do recurso.
+ * Implementation base uri of all resources of application.
  *
  * @author Thiago Michel Volpato
  * @since 2017

@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Interface entidade.
  *
  * @author Thiago Michel Volpato
- * @sice 2017
+ * @since 2017
  * @version 1.0.0
  */
 public interface IEntity extends IWithLongId, Serializable {}

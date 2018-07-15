@@ -3,7 +3,7 @@ package br.com.tmvolpato.mygames.service;
 import br.com.tmvolpato.mygames.common.interfaces.IEntity;
 
 /**
- * Interface service generic.
+ * Interface generic service.
  *
  * @author Thiago Michel Volpato
  * @since 2017

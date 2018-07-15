@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
  * Implementation repository of genre.
  *
  * @author Thiago Michel Volpato
- * @sice 2018
+ * @since 2018
  * @version 1.0.0
  */
 @Repository

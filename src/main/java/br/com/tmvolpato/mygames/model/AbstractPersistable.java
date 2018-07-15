@@ -15,8 +15,8 @@ import java.time.LocalDateTime;
  * Abstract class.
  *
  * @author Thiago Michel Volpato
+ * @since 2017
  * @version 1.0.0
- * @sice 2017
  */
 @MappedSuperclass
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })

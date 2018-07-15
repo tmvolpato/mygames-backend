@@ -19,8 +19,8 @@ import java.util.Set;
  * Role class.
  *
  * @author Thiago Michel Volpato
+ * @since 2017
  * @version 1.0.0
- * @sice 2017
  */
 @Entity
 @Table(name = ConstantTable.ROLE, uniqueConstraints =

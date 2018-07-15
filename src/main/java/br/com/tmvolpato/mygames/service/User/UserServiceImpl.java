@@ -20,8 +20,8 @@ import java.util.Optional;
  * Implementation user service.
  *
  * @author Thiago Michel Volpato
- * @version 1.0.0
  * @since 2017
+ * @version 1.0.0
  */
 @Service
 @Transactional

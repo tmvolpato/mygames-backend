@@ -24,7 +24,7 @@ import java.util.Arrays;
  * Authorization server in memory.
  *
  * @author Thiago Michel Volpato
- * @sice 2017
+ * @since 2017
  * @version 1.0.0
  */
 //@Configuration

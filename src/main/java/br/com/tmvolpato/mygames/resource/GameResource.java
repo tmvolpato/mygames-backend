@@ -5,7 +5,6 @@ import br.com.tmvolpato.mygames.common.constant.ConstantQuery;
 import br.com.tmvolpato.mygames.common.web.util.Mappings;
 import br.com.tmvolpato.mygames.model.Game;
 import br.com.tmvolpato.mygames.repository.game.filter.GameFilter;
-import br.com.tmvolpato.mygames.service.User.UserService;
 import br.com.tmvolpato.mygames.service.game.GameService;
 import br.com.tmvolpato.mygames.service.security.UserApplication;
 import com.google.common.collect.Lists;
@@ -34,8 +33,8 @@ import java.util.concurrent.TimeUnit;
  * Game resource.
  *
  * @author Thiago Michel Volpato
- * @version 1.0.0
  * @since 2017
+ * @version 1.0.0
  */
 @RestController
 @RequestMapping(value = Mappings.GAMES, produces = MediaType.APPLICATION_JSON_VALUE)

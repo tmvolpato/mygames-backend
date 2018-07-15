@@ -9,10 +9,10 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import java.util.Locale;
 
 /**
- * Classe resource bundle.
+ * Resource bundle.
  *
  * @author Thiago Michel Volpato
- * @sice 2017
+ * @since 2017
  * @version 1.0.0
  */
 @Configuration

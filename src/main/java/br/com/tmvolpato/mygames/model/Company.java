@@ -1,10 +1,9 @@
 package br.com.tmvolpato.mygames.model;
 
 import br.com.tmvolpato.mygames.common.constant.ConstantColumn;
-import br.com.tmvolpato.mygames.common.constant.ConstraintMessageValidation;
 import br.com.tmvolpato.mygames.common.constant.ConstantNumeric;
 import br.com.tmvolpato.mygames.common.constant.ConstantTable;
-import io.swagger.annotations.ApiModel;
+import br.com.tmvolpato.mygames.common.constant.ConstraintMessageValidation;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -18,8 +17,8 @@ import javax.validation.constraints.NotBlank;
  * Company class.
  *
  * @author Thiago Michel Volpato
+ * @since 2017
  * @version 1.0.0
- * @sice 2017
  */
 @Entity
 @Table(name = ConstantTable.COMPANY, uniqueConstraints =

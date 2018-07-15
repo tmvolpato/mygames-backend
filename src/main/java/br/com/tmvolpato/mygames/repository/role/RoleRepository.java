@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
  * Interface repository of role.
  *
  * @author Thiago Michel Volpato
- * @sice 2017
+ * @since 2017
  * @version 1.0.0
  */
 @Repository

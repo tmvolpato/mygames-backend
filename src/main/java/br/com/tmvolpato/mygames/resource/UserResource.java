@@ -28,8 +28,8 @@ import java.util.concurrent.TimeUnit;
  * User resource.
  *
  * @author Thiago Michel Volpato
- * @version 1.0.0
  * @since 2018
+ * @version 1.0.0
  */
 @RestController
 @RequestMapping(value = Mappings.USERS, produces = MediaType.APPLICATION_JSON_VALUE)
