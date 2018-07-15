@@ -13,8 +13,8 @@ import javax.persistence.criteria.JoinType;
  * Specific query for game.
  *
  * @author Thiago Michel Volpato
+ * @since 2017
  * @version 1.0.0
- * @sice 2017
  */
 public final class GameSpecification {
 

@@ -12,7 +12,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Classe ouvinte que dispara o evento de criação da uri para o novo recurso criado.
+ * Listening the event for create url for the new resource.
  *
  * @author Thiago Michel Volpato
  * @since 2017

@@ -28,9 +28,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Test resource for new account.
  *
  * @author Thiago Michel Volpato
+ * @since 2018
  * @version 1.0.0
- * @sice 2018
- */
+  */
 @RunWith(SpringRunner.class)
 @WebMvcTest(value = AccountResource.class, secure = false)
 public class AccountResourceTest {

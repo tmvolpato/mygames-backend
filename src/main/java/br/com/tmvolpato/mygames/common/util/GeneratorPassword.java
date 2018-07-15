@@ -11,8 +11,8 @@ import java.util.Map;
  * Generator password.
  *
  * @author Thiago Michel Volpato
+ * @since 2017
  * @version 1.0.0
- * @sice 2017
  */
 public class GeneratorPassword {
 
@@ -21,7 +21,7 @@ public class GeneratorPassword {
      */
     private static final String ENCODE_ID = "bcrypt";
 
-    /**
+    /**FO
      * Encode password.
      *
      * @param password

@@ -19,7 +19,7 @@ import javax.validation.constraints.NotBlank;
  * Privilege class.
  *
  * @author Thiago Michel Volpato
- * @sice 2017
+ * @since 2017
  * @version 1.0.0
  */
 @Entity

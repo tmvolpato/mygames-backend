@@ -1,16 +1,15 @@
 package br.com.tmvolpato.mygames.repository.game.queryCustom;
 
 import br.com.tmvolpato.mygames.model.Game;
-import br.com.tmvolpato.mygames.model.User;
 import br.com.tmvolpato.mygames.repository.game.filter.GameFilter;
 import br.com.tmvolpato.mygames.service.security.UserApplication;
 import org.springframework.data.domain.Page;
 
 /**
- * Interface query customizada para game.
+ * Interface customize query.
  *
  * @author Thiago Michel Volpato
- * @sice 2017
+ * @since 2017
  * @version 1.0.0
  */
 public interface GameRepositoryQuery {

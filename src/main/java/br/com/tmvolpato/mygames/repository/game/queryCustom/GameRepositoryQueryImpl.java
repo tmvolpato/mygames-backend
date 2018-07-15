@@ -23,8 +23,8 @@ import java.util.List;
  * Implementation custom query of game.
  *
  * @author Thiago Michel Volpato
+ * @since 2017
  * @version 1.0.0
- * @sice 2017
  */
 public class GameRepositoryQueryImpl extends AbstractQuery implements GameRepositoryQuery {
 

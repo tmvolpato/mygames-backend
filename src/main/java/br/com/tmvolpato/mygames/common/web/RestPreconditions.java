@@ -2,11 +2,10 @@ package br.com.tmvolpato.mygames.common.web;
 
 import br.com.tmvolpato.mygames.common.web.exception.MyBadRequestException;
 import br.com.tmvolpato.mygames.common.web.exception.MyConflictException;
-import br.com.tmvolpato.mygames.common.web.exception.MyForbiddenException;
 import br.com.tmvolpato.mygames.common.web.exception.MyResourceNotFoundException;
 
 /**
- * Classe de tratamento para os recursos.
+ * Preconditions.
  *
  * @author Thiago Michel Volpato
  * @since 2017
@@ -19,33 +18,32 @@ public final class RestPreconditions {
     }
 
     /**
-     * Objeto passado como parametro não pode ser nulo.
+     * Check parameter is not null if different launches exeption not found.
      *
      * @param reference
      * @param <T>
-     * @return not null referente ao que foi validado
+     * @return object
      */
     public static <T> T checkNotNull(final T reference) {
         return checkNotNull(reference, null);
     }
 
     /**
-     * Valor booelano indicando se ele é nulo.
+     * Check boolean if different of true launches exception not found.
      *
      * @param exists
-     * @return not null referente ao que foi validado
      */
     public static void checkNotNull(final boolean exists) {
         checkNotNull(exists, null);
     }
 
     /**
-     *Objeto passado como parametro não pode ser nulo e define uma mensagem.
+     * Check parameter if null launches exception not found with message
      *
      * @param reference
      * @param message
      * @param <T>
-     * @return not null referente ao que foi validado com mensagem
+     * @return object
      */
     public static <T> T checkNotNull(final T reference, final String message) {
         if (reference == null) {
@@ -55,9 +53,8 @@ public final class RestPreconditions {
     }
 
     /**
-     * Valor booelano indicando se ele é nulo e define uma mensagem.
+     * Check boolean if different of true launches exception not found with message.
      *
-     * @return not null referente ao que foi validado com mensagem.
      * @param entityExists
      * @param message
      */
@@ -68,23 +65,23 @@ public final class RestPreconditions {
     }
 
     /**
-     * Referência passada um parâmetro para o método de chamada não é nulo.
+     * Check parameter if null launches exception bad request.
      *
      * @param reference
      * @param <T>
-     * @return not null referente ao que foi validado
+     * @return object
      */
     public static <T> T checkRequestElementNotNull(final T reference) {
         return checkRequestElementNotNull(reference, null);
     }
 
     /**
-     * Referência passada um parâmetro para o método de chamada não é nulo.
+     * Check parameter if null launches exception bad request with message.
      *
      * @param reference
      * @param message
      * @param <T>
-     * @return
+     * @return object
      */
     public static <T> T checkRequestElementNotNull(final T reference, final String message) {
         if (reference == null) {
@@ -94,7 +91,7 @@ public final class RestPreconditions {
     }
 
     /**
-     * Garante a verdade de uma expressão.
+     * Check boolean if different of true launches exception conflict.
      *
      * @param expression
      */
@@ -103,7 +100,7 @@ public final class RestPreconditions {
     }
 
     /**
-     * Garante a verdade de uma expressão.
+     * Check boolean if different of true launches exception conflict with message
      *
      * @param expression
      * @param message
@@ -115,7 +112,7 @@ public final class RestPreconditions {
     }
 
     /**
-     * Garante a verdade da expressão.
+     * Check boolean if different of true launches exception bad request.
      *
      * @param expression
      */
@@ -124,7 +121,7 @@ public final class RestPreconditions {
     }
 
     /**
-     * Garante a verdade de uma expressão e relacionada à validade do pedido
+     * Check boolean if different of true launches exception bad request with message.
      *
      * @param expression
      * @param message
@@ -134,74 +131,4 @@ public final class RestPreconditions {
             throw new MyBadRequestException(message);
         }
     }
-
-    /**
-     * Verifica se algum valor foi encontrado, caso contrario lança exceção.
-     *
-     * @param expression
-     */
-    public static void checkFound(final boolean expression) {
-        checkFound(expression, null);
-    }
-
-    /**
-     * Verifica se algum valor foi encontrado, caso contrario lança exceção.
-     *
-     * @param expression
-     * @param message
-     */
-    public static void checkFound(final boolean expression, final String message) {
-        if (!expression) {
-            throw new MyResourceNotFoundException(message);
-        }
-    }
-
-    /**
-     * Verifica se algum valor foi encontrado, caso contrario lança exceção.
-     *
-     * @param resource
-     * @param <T>
-     * @return
-     */
-    public static <T> T checkFound(final T resource) {
-        return checkFound(resource, null);
-    }
-
-    /**
-     * Verifica se algum valor foi encontrado, caso contrario lança exceção.
-     *
-     * @param resource
-     * @param message
-     * @param <T>
-     * @return
-     */
-    public static <T> T checkFound(final T resource, final String message) {
-        if (resource == null) {
-            throw new MyResourceNotFoundException(message);
-        }
-
-        return resource;
-    }
-
-     /**
-     * Verifica se algum valor foi encontrado, caso contrario lança exceção.
-     *
-     * @param expression
-     */
-    public static void checkAllowed(final boolean expression) {
-        checkAllowed(expression, null);
-    }
-
-    /**
-     * Verifica se algum valor foi encontrado, caso contrario lança exceção.
-     *
-     * @param expression
-     * @param message
-     */
-    public static void checkAllowed(final boolean expression, final String message) {
-        if (!expression) {
-            throw new MyForbiddenException(message);
-        }
-    }
-
 }

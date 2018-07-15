@@ -15,8 +15,8 @@ import org.springframework.security.oauth2.provider.token.ResourceServerTokenSer
  * Resource server configuration.
  *
  * @author Thiago Michel Volpato
+ * @since 2017
  * @version 1.0.0
- * @sice 2017
  */
 @Configuration
 @EnableResourceServer

@@ -8,10 +8,10 @@ import lombok.Getter;
 import java.math.BigDecimal;
 
 /**
- * Classe filtro do game.
+ * Game filter
  *
  * @author Thiago Michel Volpato
- * @sice 2017
+ * @since 2017
  * @version 1.0.0
  */
 public class GameFilter {

@@ -4,11 +4,11 @@ import br.com.tmvolpato.mygames.common.web.exception.*;
 import org.springframework.util.StringUtils;
 
 /**
- * Pre condições de exception do serviço.
+ * Preconditions service.
  *
  * @author Thiago Michel Volpato
- * @version 1.0.0
  * @since 2017
+ * @version 1.0.0
  */
 public final class ServicePreconditions {
 
@@ -17,11 +17,11 @@ public final class ServicePreconditions {
     }
 
     /**
-     * Entidade existe.
+     * Check entity if is null launches exception not found.
      *
      * @param entity
      * @param <T>
-     * @return
+     * @return object
      */
     public static <T> T checkEntityExists(final T entity) {
         if (entity == null) {
@@ -31,7 +31,7 @@ public final class ServicePreconditions {
     }
 
     /**
-     * Entidade existe.
+     * Check entity if different of true launches exception not found.
      *
      * @param entityExists
      */
@@ -42,7 +42,7 @@ public final class ServicePreconditions {
     }
 
     /**
-     * E-mail already exist.
+     * Check e-mail already exist if true launches exception conflict.
      *
      * @param exist
      */
@@ -53,7 +53,7 @@ public final class ServicePreconditions {
     }
 
     /**
-     * Verifica o parametro passado.
+     * Check parameter if is null launches exception bad request.
      *
      * @param value
      */
@@ -64,7 +64,7 @@ public final class ServicePreconditions {
     }
 
     /**
-     * Verifica o parametro passado.
+     * Check parameter if empty launches exception bad request.
      *
      * @param value
      */
@@ -75,7 +75,7 @@ public final class ServicePreconditions {
     }
 
     /**
-     * Verifica o usuário do applicação.
+     * Check if user of application is different is null and launches exception forbidden.
      *
      * @param object
      */
@@ -86,7 +86,7 @@ public final class ServicePreconditions {
     }
 
     /**
-     * Verifica o argumento passado.
+     * Check argument if different of true launches exception bad request.
      *
      * @param okArgument
      */
@@ -97,7 +97,8 @@ public final class ServicePreconditions {
     }
 
     /**
-     * Verifica se o valor passado já existe.
+     * Check value already exist and launches exception conflict.
+     *
      * @param value
      */
     public static void checkIfAlreadyExist(final boolean value) {
@@ -107,7 +108,8 @@ public final class ServicePreconditions {
     }
 
     /**
-     * Verifica se o usuário logado é dono do recurso.
+     * Check if the user ou resource is null and launches exception bad request and
+     * check if user is different owner of resource and launches exception not found.
      *
      * @param ownerId
      * @param resourceId

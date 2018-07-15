@@ -4,7 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
- * Classe de exceção para recurso não encontrdo.
+ * Exception not found.
  *
  * @author Thiago Michel Volpato
  * @since 2017

@@ -1,7 +1,7 @@
 package br.com.tmvolpato.mygames.common.constant;
 
 /**
- * Message of validation.
+ * Constant message of validation.
  *
  * @author Thiago Michel Volpato
  * @since 2017

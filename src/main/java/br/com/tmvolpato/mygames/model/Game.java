@@ -20,8 +20,8 @@ import java.math.BigDecimal;
  * Game class.
  *
  * @author Thiago Michel Volpato
+ * @since 2017
  * @version 1.0.0
- * @sice 2017
  */
 @Entity
 @Table(name = ConstantTable.GAME)

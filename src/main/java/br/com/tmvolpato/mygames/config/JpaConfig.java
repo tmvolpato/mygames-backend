@@ -20,10 +20,10 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 /**
- * JPA configuration.
+ * Configuration JPA of application.
  *
  * @author Thiago Michel Volpato
- * @sice 2017
+ * @since 2017
  * @version 1.0.0
  */
 @Profile("dev")

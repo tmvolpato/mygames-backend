@@ -1,7 +1,7 @@
 package br.com.tmvolpato.mygames.common.constant;
 
 /**
- * Configurações de recursos.
+ * Constant of configuration base url of endpoint.
  *
  * @author Thiago Michel Volpato
  * @since 2017

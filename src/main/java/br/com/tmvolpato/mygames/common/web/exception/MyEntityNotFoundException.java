@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import javax.persistence.PersistenceException;
 
 /**
- * Classe exceção para recurso não encontrado.
+ * Exception not found.
  *
  * @author Thiago Michel Volpato
  * @since 2017

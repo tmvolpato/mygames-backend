@@ -27,10 +27,9 @@ import java.util.Set;
  * Unit test of GameRepository.
  *
  * @author Thiago Michel Volpato
+ * @since 2018
  * @version 1.0.0
- * @sice 2018
  */
-
 @RunWith(SpringRunner.class)
 @DataJpaTest
 public class GameRepositoryTest {

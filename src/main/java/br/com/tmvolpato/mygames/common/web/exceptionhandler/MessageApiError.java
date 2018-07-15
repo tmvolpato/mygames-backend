@@ -19,11 +19,11 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * A Class that receives the error of class MyGamesExceptionHandler.
+ * Receives the error of class MyGamesExceptionHandler.
  *
- * @author Thiago Michel Volpato
- * @version 1.0.0
+ * @author Thiago Michel
  * @since 2018
+ * @version 1.0.0
  */
 @JsonTypeInfo(include = JsonTypeInfo.As.WRAPPER_OBJECT, use = JsonTypeInfo.Id.CUSTOM, property = "error", visible = true)
 @JsonTypeIdResolver(LowerCaseClassNameResolver.class)

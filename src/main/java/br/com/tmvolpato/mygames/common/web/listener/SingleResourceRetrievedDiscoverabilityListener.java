@@ -15,15 +15,12 @@ import javax.servlet.http.HttpServletResponse;
 import static br.com.tmvolpato.mygames.common.web.util.LinkUtil.REL_COLLECTION;
 import static br.com.tmvolpato.mygames.common.web.util.LinkUtil.createLinkHeader;
 
-
-
 /**
- * Classe listener que observa o evento
- * simples quando é recuperado e adiciona informações no cabeçalho.
+ * Listening the event for simple resource and add information in header.
  *
  * @author Thiago Michel Volpato
- * @version 1.0.0
  * @since 2017
+ * @version 1.0.0
  */
 @Component
 public class SingleResourceRetrievedDiscoverabilityListener implements ApplicationListener<SingleResourceRetrievedEvent> {

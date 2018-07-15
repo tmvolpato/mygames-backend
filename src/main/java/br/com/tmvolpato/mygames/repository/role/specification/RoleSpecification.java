@@ -8,11 +8,11 @@ import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.JoinType;
 
 /**
- * Query especifica do papel(Role).
+ * Specific query of role.
  *
  * @author Thiago Michel Volpato
+ * @since 2018
  * @version 1.0.0
- * @sice 2018
  */
 public final class RoleSpecification {
 

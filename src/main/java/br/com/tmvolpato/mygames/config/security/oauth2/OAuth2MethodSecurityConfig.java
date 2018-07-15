@@ -8,11 +8,11 @@ import org.springframework.security.oauth2.provider.expression.OAuth2MethodSecur
 
 /**
  *
- * Enable the use of method
+ * Enable the use of security method.
  *
  * @author Thiago Michel Volpato
+ * @since 2018
  * @version 1.0.0
- * @sice 2018
  */
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)

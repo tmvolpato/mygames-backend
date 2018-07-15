@@ -18,11 +18,12 @@ import java.time.LocalDate;
 import java.util.Collections;
 
 /**
- * Swagger2 configuration.
+ * Configuration swagger2 of application.
  *
  * @author Thiago Michel Volpato
+ * @since 2018
  * @version 1.0.0
- * @sice 2018
+
  */
 
 @Configuration

@@ -1,7 +1,7 @@
 package br.com.tmvolpato.mygames.common.constant;
 
 /**
- * Query.
+ * Constant Query.
  *
  * @author Thiago Michel Volpato
  * @since 2017
