@@ -23,7 +23,6 @@ import java.util.Collections;
  * @author Thiago Michel Volpato
  * @since 2018
  * @version 1.0.0
-
  */
 
 @Configuration

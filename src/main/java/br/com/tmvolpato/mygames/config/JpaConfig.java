@@ -1,13 +1,16 @@
 package br.com.tmvolpato.mygames.config;
 
+import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.Resource;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.jdbc.datasource.init.DataSourceInitializer;
 import org.springframework.jdbc.datasource.init.DatabasePopulator;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
@@ -61,15 +64,15 @@ public class JpaConfig {
     public DataSourceInitializer dataSourceInitializer() {
         final DataSourceInitializer initializer = new DataSourceInitializer();
         initializer.setDataSource(this.dataSource());
-        //initializer.setDatabasePopulator(this.databasePopulator());
+        initializer.setDatabasePopulator(this.databasePopulator());
         return initializer;
     }
 
     @Bean("dataSource")
     public DataSource dataSource() {
-        final DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        final HikariDataSource dataSource = new HikariDataSource();
         dataSource.setDriverClassName(this.env.getProperty("jdbc.driverClassName"));
-        dataSource.setUrl(this.env.getProperty("jdbc.url"));
+        dataSource.setJdbcUrl(this.env.getProperty("jdbc.url"));
         dataSource.setUsername(this.env.getProperty("jdbc.username"));
         dataSource.setPassword(this.env.getProperty("jdbc.password"));
         return dataSource;
@@ -94,6 +97,11 @@ public class JpaConfig {
         hibernateProperties.setProperty("hibernate.hbm2ddl.auto", this.env.getProperty("hibernate.hbm2ddl.auto", "validate"));
         hibernateProperties.setProperty("hibernate.dialect", this.env.getProperty("hibernate.dialect"));
         hibernateProperties.setProperty("hibernate.jdbc.lob.non_contextual_creation", "true");
+        hibernateProperties.setProperty("hibernate.hikari.connectionTimeout", this.env.getProperty("hibernate.hikari.connectionTimeout"));
+        hibernateProperties.setProperty("hibernate.hikari.minimumIdle", this.env.getProperty("hibernate.hikari.minimumIdle"));
+        hibernateProperties.setProperty("hibernate.hikari.maximumPoolSize", this.env.getProperty("hibernate.hikari.maximumPoolSize"));
+        hibernateProperties.setProperty("hibernate.hikari.idleTimeout", this.env.getProperty("hibernate.hikari.idleTimeout"));
+        hibernateProperties.setProperty("hibernate.hikari.maxLifetime", this.env.getProperty("hibernate.hikari.maxLifetime"));
         return hibernateProperties;
     }
 

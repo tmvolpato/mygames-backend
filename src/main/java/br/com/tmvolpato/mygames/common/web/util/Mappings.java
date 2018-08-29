@@ -11,10 +11,10 @@ import br.com.tmvolpato.mygames.common.constant.ConstantWeb;
  */
 public final class Mappings {
 
-    public static final String DOCUMENTATION_API = ConstantWeb.API + ConstantWeb.PUBLIC + "documentation-api";
-    public static final String CREATE_ACCOUNT = ConstantWeb.API + ConstantWeb.PUBLIC + "create-account";
-    public static final String USERS = ConstantWeb.API + ConstantWeb.RESTRICT + "users";
-    public static final String GAMES = ConstantWeb.API + ConstantWeb.RESTRICT + "games";
+    public static final String DOCUMENTATION_API = ConstantWeb.PUBLIC + "documentation-api";
+    public static final String CREATE_ACCOUNT = ConstantWeb.PUBLIC + "create-account";
+    public static final String USERS = ConstantWeb.RESTRICT + "users";
+    public static final String GAMES = ConstantWeb.RESTRICT + "games";
 
     private Mappings() {
         throw new AssertionError();

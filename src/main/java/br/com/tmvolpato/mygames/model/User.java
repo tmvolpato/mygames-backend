@@ -29,8 +29,8 @@ import static com.fasterxml.jackson.annotation.JsonProperty.Access.WRITE_ONLY;
 @Table(name = ConstantTable.USERS, uniqueConstraints =
 @UniqueConstraint(name = "email_uk", columnNames = { "email" }), indexes =
 @Index(name = "idx_email", columnList = "email", unique = true))
-@ToString(of = {"id"})
-@EqualsAndHashCode(of = {"id"}, callSuper = false)
+@ToString(of = { "id" })
+@EqualsAndHashCode(of = { "id" }, callSuper = false)
 public class User extends AbstractPersistable {
 
     /**
@@ -95,7 +95,7 @@ public class User extends AbstractPersistable {
     }
 
     /**
-     * Codifica a senha.
+     * Encode password.
      * @param password
      * @return
      */
@@ -104,7 +104,7 @@ public class User extends AbstractPersistable {
     }
 
     /**
-     * Adiciona um único papel para o usuário criado.
+     * Add roles.
      * @param roles
      */
     private void addRoles(final Set<Role> roles) {

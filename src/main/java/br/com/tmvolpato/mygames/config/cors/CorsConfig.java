@@ -22,7 +22,7 @@ import org.springframework.web.filter.CorsFilter;
 @Configuration
 public class CorsConfig {
 
-    //private String allowOrigin = "http://localhost:8000";
+    private final String origin = "http://localhost:4200";
 
     @Bean
     public FilterRegistrationBean customCorsFilter() {
