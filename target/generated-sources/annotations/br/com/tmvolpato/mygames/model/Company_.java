@@ -10,5 +10,7 @@ public abstract class Company_ extends br.com.tmvolpato.mygames.model.AbstractPe
 
 	public static volatile SingularAttribute<Company, String> name;
 
+	public static final String NAME = "name";
+
 }
 

@@ -10,5 +10,7 @@ public abstract class Platform_ extends br.com.tmvolpato.mygames.model.AbstractP
 
 	public static volatile SingularAttribute<Platform, String> name;
 
+	public static final String NAME = "name";
+
 }
 

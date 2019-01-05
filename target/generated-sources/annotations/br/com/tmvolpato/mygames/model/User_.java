@@ -16,5 +16,12 @@ public abstract class User_ extends br.com.tmvolpato.mygames.model.AbstractPersi
 	public static volatile SingularAttribute<User, String> email;
 	public static volatile SingularAttribute<User, Boolean> enabled;
 
+	public static final String PASSWORD = "password";
+	public static final String ROLES = "roles";
+	public static final String NAME = "name";
+	public static final String GAMES = "games";
+	public static final String EMAIL = "email";
+	public static final String ENABLED = "enabled";
+
 }
 

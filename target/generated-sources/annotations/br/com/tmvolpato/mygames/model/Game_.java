@@ -16,5 +16,12 @@ public abstract class Game_ extends br.com.tmvolpato.mygames.model.AbstractPersi
 	public static volatile SingularAttribute<Game, User> user;
 	public static volatile SingularAttribute<Game, Platform> platform;
 
+	public static final String PRICE = "price";
+	public static final String GENRE = "genre";
+	public static final String COMPANY = "company";
+	public static final String TITLE = "title";
+	public static final String USER = "user";
+	public static final String PLATFORM = "platform";
+
 }
 
