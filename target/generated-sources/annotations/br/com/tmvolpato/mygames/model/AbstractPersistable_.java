@@ -13,5 +13,9 @@ public abstract class AbstractPersistable_ {
 	public static volatile SingularAttribute<AbstractPersistable, Long> id;
 	public static volatile SingularAttribute<AbstractPersistable, LocalDateTime> lastEdition;
 
+	public static final String INCLUSION = "inclusion";
+	public static final String ID = "id";
+	public static final String LAST_EDITION = "lastEdition";
+
 }
 

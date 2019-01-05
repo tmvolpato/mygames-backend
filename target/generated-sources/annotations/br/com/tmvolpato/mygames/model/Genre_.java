@@ -10,5 +10,7 @@ public abstract class Genre_ extends br.com.tmvolpato.mygames.model.AbstractPers
 
 	public static volatile SingularAttribute<Genre, String> name;
 
+	public static final String NAME = "name";
+
 }
 
