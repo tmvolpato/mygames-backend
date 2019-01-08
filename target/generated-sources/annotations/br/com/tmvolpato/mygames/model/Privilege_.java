@@ -10,5 +10,7 @@ public abstract class Privilege_ extends br.com.tmvolpato.mygames.model.Abstract
 
 	public static volatile SingularAttribute<Privilege, String> name;
 
+	public static final String NAME = "name";
+
 }
 

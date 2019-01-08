@@ -12,5 +12,8 @@ public abstract class Role_ extends br.com.tmvolpato.mygames.model.AbstractPersi
 	public static volatile SetAttribute<Role, Privilege> privileges;
 	public static volatile SingularAttribute<Role, String> name;
 
+	public static final String PRIVILEGES = "privileges";
+	public static final String NAME = "name";
+
 }
 
