@@ -1,0 +1,52 @@
+version: "3.7"
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    networks:
+      - my-network
+    depends_on:
+      - database
+
+  database:
+    image: postgres:9.6
+    container_name: database
+    volumes:
+      - dbdata=/var/lib/postgresql/data/
+    user: postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=adminadmin
+      - POSTGRES_DB=mygamesDB
+      - PGDATA=/var/lib/postgresql/data/
+    ports:
+      - "5432:5432"
+    networks:
+      - my-network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=pgadmin4@pgadmin.org
+      - PGADMIN_DEFAULT_PASSWORD=admin
+    ports:
+      - "15432:80"
+    networks:
+      - my-network
+    depends_on:
+      - database
+networks:
+  my-network:
+    driver: bridge
+
+volumes:
+  dbdata: {}
+
+
+
