@@ -26,19 +26,15 @@ import java.util.Properties;
  * Configuration JPA of application.
  *
  * @author Thiago Michel Volpato
- * @since 2017
  * @version 1.0.0
+ * @since 2017
  */
 @Profile("dev")
 @EnableTransactionManagement
-@PropertySource({ "classpath:persistence-dev.properties" })
-@EnableJpaRepositories({ "br.com.tmvolpato.mygames.repository" })
+@PropertySource({"classpath:persistence-dev.properties"})
+@EnableJpaRepositories({"br.com.tmvolpato.mygames.repository"})
 @Configuration
 public class JpaConfig {
-
-    public JpaConfig() {
-        super();
-    }
 
     @Autowired
     private Environment env;
@@ -48,6 +44,10 @@ public class JpaConfig {
 
     @Value("classpath:schema-data.sql")
     private Resource schemaDataScript;
+
+    public JpaConfig() {
+        super();
+    }
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
