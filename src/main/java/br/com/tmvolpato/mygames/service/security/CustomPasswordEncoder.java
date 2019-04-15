@@ -5,13 +5,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import static java.util.stream.Collectors.joining;
 
 /**
- * Codification password.
+ * Custom password encoder.
  *
  * @author Thiago Michel Volpato
  * @since 2018
  * @version 1.0.0
  */
-public class BSPasswordEncoder implements PasswordEncoder {
+public class CustomPasswordEncoder implements PasswordEncoder {
 
     @Override
     public String encode(final CharSequence charSequence) {

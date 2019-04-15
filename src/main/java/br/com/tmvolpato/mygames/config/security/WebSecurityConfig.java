@@ -1,12 +1,11 @@
 package br.com.tmvolpato.mygames.config.security;
 
-import br.com.tmvolpato.mygames.service.security.BSPasswordEncoder;
+import br.com.tmvolpato.mygames.service.security.CustomPasswordEncoder;
 import br.com.tmvolpato.mygames.service.security.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationEventPublisher;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -36,23 +35,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private CustomUserDetailsService userDetailsService;
 
-    @Autowired
-    private AuthenticationEventPublisher authenticationEventPublisher;
-
     @Value("${security.security-realm}")
     private String securityRealm;
 
     @Autowired
     public void configure(final AuthenticationManagerBuilder auth) throws Exception {
         auth
-                //.eraseCredentials(false)
-                //.authenticationEventPublisher(this.authenticationEventPublisher)
                 .userDetailsService(this.userDetailsService)
                 .passwordEncoder(this.passwordEncoder());
     }
 
-    @Override
     @Bean
+    @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
@@ -84,29 +78,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         encoders.put(idForEncode, defaultEncoder);
 
         final DelegatingPasswordEncoder rv = new DelegatingPasswordEncoder(idForEncode, encoders);
-        rv.setDefaultPasswordEncoderForMatches(new BSPasswordEncoder());
+        rv.setDefaultPasswordEncoderForMatches(new CustomPasswordEncoder());
         return rv;
     }
-
-//    @Bean
-//    public AuthenticationEventPublisher authenticationEventPublisher(final ApplicationEventPublisher publisher) {
-//        return new DefaultAuthenticationEventPublisher(publisher);
-//    }
-//
-//    @Bean
-//    public ApplicationListener<AuthenticationSuccessEvent> onSuccessListener(final PasswordEncoder passwordEncoder) {
-//        return (AuthenticationSuccessEvent event) -> {
-//            final Authentication authentication = event.getAuthentication();
-//
-//            if (authentication instanceof UsernamePasswordAuthenticationToken && authentication.getCredentials() != null) {
-//
-////                final CharSequence plainTextPassword = (CharSequence) authentication.getCredentials();
-////                final String rehashedPassword = passwordEncoder.encode(plainTextPassword);
-////                System.out.print(rehashedPassword);
-////                ((UsernamePasswordAuthenticationToken) authentication).eraseCredentials();
-//            }
-//        };
-//
-//    }
 }
 
