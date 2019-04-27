@@ -4,6 +4,7 @@ API My Games
 # Start application My Games
 
 > $ cd mygames-backend
+> $ mvn package
 
 Docker-compose 
 > $ docker-compose build --no-cache
@@ -47,7 +48,7 @@ curl -H "Content-type: application/json" -H "Authorization: Bearer your_token" h
 ### Create a new user
 ...
 
-### create a new game
+### Create a new game
 ...
 
 
