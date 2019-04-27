@@ -4,6 +4,7 @@ API My Games
 # Start application My Games
 
 > $ cd mygames-backend
+
 > $ mvn package
 
 Docker-compose 
