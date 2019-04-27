@@ -20,7 +20,7 @@ $ docker-compose build --no-cache
 $ docker-compose up -d
 ~~~
 
-# Access endpoint of My games
+# Endpoint of My games
  
  ### Get access token 
 ~~~
