@@ -2,15 +2,23 @@
 API My Games
 
 # Start application My Games
+~~~
+$ cd mygames-backend
+~~~
 
-> $ cd mygames-backend
+~~~
+$ mvn package
+~~~
 
-> $ mvn package
+### Docker Compose 
 
-Docker-compose 
-> $ docker-compose build --no-cache
+~~~
+$ docker-compose build --no-cache
+~~~
 
-> $ docker-compose up -d
+~~~
+$ docker-compose up -d
+~~~
 
 # Access endpoint of My games
  
