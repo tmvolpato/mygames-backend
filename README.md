@@ -20,15 +20,15 @@ $ docker-compose build --no-cache
 $ docker-compose up -d
 ~~~
 
-# Endpoint of My games
-
-### Swagger UI
+# Documentation - Swagger UI
 
 ~~~
 http://localhost:8000/swagger-ui.html
 ~~~ 
- 
- ### Get access token 
+
+# Endpoint of My games
+
+### Get access token 
 ~~~
 curl --user angular:12345 -X POST -H "Content-Type: application/x-www-form-urlencoded" -d 'username=admin@email.com&password=admin123&grant_type=password' "http://localhost:8000/oauth/token"
 ~~~
