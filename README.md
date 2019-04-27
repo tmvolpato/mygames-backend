@@ -21,6 +21,12 @@ $ docker-compose up -d
 ~~~
 
 # Endpoint of My games
+
+### Swagger UI
+
+~~~
+http://localhost:8000/swagger-ui.html
+~~~ 
  
  ### Get access token 
 ~~~
