@@ -37,11 +37,11 @@ curl --user angular:12345 -X POST -H "Content-Type: application/x-www-form-urlen
 
 1.step
 ~~~
-mygamespagination='http://localhost:8000/api/restrict/games?page=0&size=3'
+gamespagination='http://localhost:8000/api/restrict/games?page=0&size=3'
 ~~~
 2.step
 ~~~
-curl -H "Content-type: application/json" -H "Authorization: Bearer your_token" $mygamespagination | jq '.'
+curl -H "Content-type: application/json" -H "Authorization: Bearer your_token" $gamespagination | jq '.'
 ~~~
 
 ### Find game by identifier
